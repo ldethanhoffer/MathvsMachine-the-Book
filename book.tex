@@ -1,0 +1,1872 @@
+\documentclass{book}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,tikz,scalerel,mathrsfs,marvosym,titlesec,leftidx}
+
+\usepackage[all]{xy}
+\usepackage{fancyhdr}
+\usepackage{blkarray}
+
+
+\theoremstyle{plain}
+\newtheorem{corollary}{Corollary}[subsection]
+\newtheorem{convention}[corollary]{Convention}
+\newtheorem{example}[corollary]{Example}
+\newtheorem*{theorem*}{theorem}
+\newtheorem{theorem}[corollary]{Theorem}
+\newtheorem{lemma}[corollary]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{maintheorem}{Theorem}
+%reset maintheorem counter to use the corresponding letter
+\renewcommand{\themaintheorem}{\Alph{maintheorem}}
+\newtheorem{remark}[corollary]{Remark}
+\newtheorem{proposition}[corollary]{Proposition}
+
+
+\theoremstyle{definition}
+\newtheorem{definition}[corollary]{Definition}
+\newtheorem{definition*}{Definition}
+\newtheorem{notation}{Notation}
+
+%change the default font to bodoni
+\usepackage[default]{gfsbodoni}
+\usepackage[T1]{fontenc}
+
+
+
+%start at section 0 for introduction 
+\setcounter{section}{-1}
+
+\newcommand{\A}{\mathcal{A}}
+\DeclareMathOperator{\avg}{avg}
+\newcommand{\abs}[1]{\vert #1 \vert }
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Aff}{aff}
+\DeclareMathOperator{\arginf}{arginf}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\argsup}{argsup}
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\Aut}{Aut}
+\renewcommand{\b}{\bullet}
+\newcommand{\bp}{\mathbf{\Pi}}
+\newcommand{\bl}[2]{\left\langle #1,#2\right\rangle}
+\def\BVm{\operatorname{BV}_-}
+\DeclareMathOperator{\BiMod}{BiMod}
+\DeclareMathOperator{\bimod}{bimod}
+\DeclareMathOperator{\card}{card}
+\newcommand{\C}{{\mathcal{C}}}
+\DeclareMathOperator{\CC}{CC}
+\def\cd{\operatorname {cd}}
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\CH}{CH}
+\DeclareMathOperator{\Conv}{Conv}
+\DeclareMathOperator{\coh}{coh}
+\DeclareMathOperator{\cone}{cone}
+\DeclareMathOperator{\coker}{coker}
+\renewcommand{\d}[1]{\mathbb{#1}}
+\newcommand{\D}{{\mathscr{D}}}
+\DeclareMathOperator{\der}{R}
+\DeclareMathOperator{\Def}{Def}
+\DeclareMathOperator{\Dir}{Dir}
+\newcommand{\define}{\stackrel{\operatorname{def}}{=}}
+\let\div\relax %unassign \div
+\DeclareMathOperator{\div}{div}
+\DeclareMathOperator{\divu}{div}
+\newcommand{\ds}{\oplus}
+\newcommand{\DS}{\bigoplus}
+\newcommand{\epi}{\xymatrix{{}\ar@{->>}[r]&{}}}
+\DeclareMathOperator{\End}{End}
+
+\DeclareMathOperator{\Entropy}{Entropy}
+\DeclareMathOperator{\Ext}{Ext}
+\newcommand{\f}[1]{\mathfrak{#1}}
+\DeclareMathOperator{\fd}{fd}
+\newcommand{\fC}{\f{C}}
+\newcommand{\fD}{\f{D}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\fun}{\mapsto}
+\newcommand{\norm}[1]{\vert \vert #1 \vert \vert}
+\DeclareMathOperator{\FRel}{FRel}
+\newcommand{\dgg}{{\f{g}^\bullet}}
+\newcommand{\g}{\f{g}}
+\DeclareMathOperator{\Gd}{Gd}
+\DeclareMathOperator{\ev}{ev}
+\DeclareMathOperator{\gldim}{gl.dim}
+\let\H\relax %unassign \H
+\DeclareMathOperator{\H}{H}
+\DeclareMathOperator{\HH}{HH}
+\DeclareMathOperator{\HC}{HC}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\ID3}{ID_3}
+\DeclareMathOperator{\im}{im}
+\newcommand{\iso}{\stackrel{\sim}{\longrightarrow}}
+\DeclareMathOperator{\Jac}{Jac}
+\renewcommand{\k}{\Bbbk}
+\DeclareMathOperator{\kNN}{kNN}
+\newcommand{\K}{\mathbb{K}}
+\DeclareMathOperator{\length}{length}
+\DeclareMathOperator{\lrk}{\l.rk}
+\newcommand{\leftperp}[1]{\leftidx{^\perp}{#1}}
+\DeclareMathOperator{\LS}{LS}
+\newcommand{\m}{\f{m}}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\MCM}{MCM}
+\DeclareMathOperator{\MC}{MC}
+\DeclareMathOperator{\MCcal}{\mathcal{MC}}
+\DeclareMathOperator{\MLE}{MLE}
+\DeclareMathOperator{\Mod}{Mod}
+\DeclareMathOperator{\Mor}{Mor}
+\def\mod{\operatorname{mod}}
+\newcommand{\mor}{\longrightarrow}
+\newcommand{\T}{\mathscr{T}}
+\renewcommand{\O}{\mathcal{O}}
+\DeclareMathOperator{\NS}{NS}
+\DeclareMathOperator{\Num}{Num}
+\newcommand{\p}{\mathfrak{p}}
+\DeclareMathOperator{\per}{per}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Perf}{Perf}
+\DeclareMathOperator{\Pic}{Pic}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\poly}{poly}
+\DeclareMathOperator{\pred}{pred}
+\DeclareMathOperator{\Qcoh}{Qcoh}
+\DeclareMathOperator{\QGr}{QGr}
+\DeclareMathOperator{\Rel}{Rel}
+\DeclareMathOperator{\RHom}{RHom}
+\renewcommand{\r}[1]{\mathcal{#1}}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\rrk}{r.rk}
+\def\locExt{\mathscr{E}\mathit{xt}}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\Sample}{S}
+\DeclareMathOperator{\RS}{RS}
+\DeclareMathOperator{\SPS}{SPS}
+\DeclareMathOperator{\sing}{sing}
+\DeclareMathOperator{\sep}{sep}
+\DeclareMathOperator{\Test}{Test}
+\DeclareMathOperator{\test}{test}
+\DeclareMathOperator{\Train}{Train}
+\DeclareMathOperator{\train}{train}
+\DeclareMathOperator{\true}{true}
+\DeclareMathOperator{\vectorspan}{span}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\SVM}{SVM}
+\DeclareMathOperator{\SupVec}{SupVec}
+\DeclareMathOperator{\Sym}{Sym}
+\def\locHom{\operatorname {\mathscr{H}\mathit{om}}}
+\DeclareMathOperator{\Tails}{Tails}
+\def\ltr{\overset{L}{\tr}}
+\renewcommand{\r}[1]{\mathcal{#1}}
+\newcommand{\mono}{\xymatrix{{}\ar@{^{(}->}[r]&{}}}\DeclareMathOperator{\num}{num}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Tors}{Tors}
+\newcommand{\tr}{\otimes}
+\newcommand{\trps}[1]{ \leftidx{^{\operatorname{tr}}}{#1}}
+\def\uRHom{\operatorname {R\mathcal{H}\mathit{om}}}
+\DeclareMathOperator{\Var}{Var}
+\newcommand{\w}{{\tt{w}}}
+\newcommand{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\qis}{qis}
+\DeclareMathOperator{\Qvr}{\mathcal{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+
+
+%add dots between section and page in toc
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+
+%interline a little larger
+\linespread{1.28}
+
+%change the dimensions of the margin
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={210mm,297mm},
+ left=23mm,
+ right=23mm,
+ top=20mm,
+ bottom=20mm,
+ }
+ 
+%changeqedsymbol
+\renewcommand{\qedsymbol}{\CrossedBox}
+
+%make the (sub)subsections run into the text, the 0.25 is the distance between the numbering and title
+\titleformat{\subsection}[runin]{\normalfont\Large\bfseries}{\thesubsection.}{0.25em}{}
+\titleformat{\subsubsection}[runin]{\normalfont\normalsize\bfseries}{\thesubsubsection.}{0.25em}{}
+
+% remove indentation:
+\setlength\parindent{0pt}
+
+
+
+
+\begin{document}
+\title{\textbf{MATHVSMACHINE: THE BOOK}}
+\author{LOUIS DE THANHOFFER DE VOLCSEY}
+\date{}
+\maketitle	
+
+
+\noindent\hrulefill
+\tableofcontents{}
+\noindent\hrulefill
+
+\part{Mathematical background}
+
+\chapter{Linear algebra}
+
+\section{the (Moore-Penrose) Pseudo-inverse}
+
+In this section, we will let $V, W$ be finite-dimensional vector spaces and $f \in \Hom_\d{R}(V,W)$.\\ It is well-known that $f$ does not have an inverse in general. There is however a natural generalization of the notion of inverse which can be defined for \emph{any} map: a \emph{pseudo-inverse}. More precisely, if $f$ either has  a nonzero kernel or if the image of $f$ is not the whole of $W$, then the inverse of $f$ will not exist. One natural way to remediate this issue is to consider complements for both subspaces and write 
+\[V\define \ker(f)\ds U_V \textrm{ and } W\define \im(f)\ds U_W\]
+
+It's easy to see that restricting $f$ to appropriate subspaces now does produce an invertible map as follows:
+
+\begin{lemma}
+	the map $f: U_V\mor \im(f)$ is an isomorphism.
+\end{lemma}
+\noindent We'll denote the inverse of $f$ on $U_V$ by $f^\sharp:\im(f)\mor U_V$. A pseudo-inverse is now the natural lift of $f^\sharp$ to the whole of $W$:
+
+
+\begin{lemma}\label{lem:pseudo-inverse}
+	There exists a unique map $f^\sharp:W\mor U_V$ making the following diagram commute:
+	\begin{displaymath}
+	\xymatrix{
+	W\ar[d]_{\pi_{\im(f)}}\ar[drr]^{f^\sharp}\\
+	\im(f)\ar[rr]_{f^\sharp} && U_V
+	}
+	\end{displaymath}
+\end{lemma}
+
+\begin{proof}
+The commutativity of the diagram means that for $u \in U_V$, we have
+\[
+	f^\sharp(w) \define u\iff f^\sharp(\pi_{\im(f)}(w)) =u\iff \pi_{\im(f)}(w) =f(u)
+\]
+Where the second equivalence follows from the fact that $f^\sharp$ is the inver of $f$ on $U_V$.\\
+The claim will thus follow if we show that the above assignment is indeed a well-defined linear map. To this end assume that $u,u' \in U_V$ satisfy $f(u')=\pi_{\im(f)}(w)=f(u)$.\\ Then $u-u' \in \ker(f)$, hence $u-u' \in \ker(f)\cap U_V$ in particular. Now since $\ker(f)\ds U_V =V$, we have  $u-u'=0$, so that $u=u'$, showing the well-definedness.\\ 
+We leave the linearity to the reader.
+\end{proof}
+It will be helpful to note that the map $f^\sharp\in \Hom(W,V)$ can also be characterized by $\im(f^\sharp)\subset U_V$ and $f\circ f^\sharp =\pi_{\im(f)}$.\\
+To give the map $f^\sharp$ a name, we first let $\Lambda(f)$ denote the set
+\[
+\Lambda(f)\define \{(U_V,U_W)\vert \, \ker(f)\ds U_V=V \textrm{ and } \im(f)\ds U_W =W \}
+\]
+and conclude from Lemma \ref{lem:pseudo-inverse} that there is a assignment:
+\[
+\Phi: \Lambda(f)\mor \Hom_\d{R}(W,V):(U_V,U_W)\fun f^\sharp
+\]
+where $f^\sharp \in \Hom_{\d{R}}(W,V)$ is the unique map satisfying
+\[
+f \circ f^\sharp = \pi_{\im(f)} \textrm{ and } \im(f^\sharp)\subset U_V
+\]
+Let's denote the image of $\Phi$ by $\Pi(f)$. Summarizing the discussion, we make the following:
+\begin{definition}\label{def:ps}
+Let $(U_V,U_W) \in \Lambda(f)$. Then the pseudo-inverse of $(U_V,U_W,f)$ is the map $\Phi(f)$.\\
+We say that $g\in \Hom_{\d{R}}(W,V)$ is a pseudo-inverse to $f$ if $g\in \Pi(f)$
+\end{definition}
+
+We can give a slightly different description of pseudo-inverses by describing them on the 2 components in the decomposition $\im(f)\ds U_W =W$:
+
+
+\begin{lemma}\label{lem:pschar2}
+Let $(U_V,U_W)$ in $\Lambda(f)$. Then the following are equivalent:
+\begin{enumerate}
+	\item $f^\sharp$ is the pseudo-inverse to $(U_V,U_W,f)$
+	\item $f^\sharp\arrowvert_{\im(f)}$ is the inverse to $f:U_V\mor \im(f)$ and $f^\sharp\arrowvert_{U_W}=0$
+\end{enumerate}
+
+\end{lemma}
+
+\begin{proof}
+	Since the pseudo=inverse to $(U_V,U_W,f)$ is unique, it suffices to show that the pseudo-inverse indeed satisfies the conditions of $(2)$. The fact that $f^\sharp\arrowvert_{\im(f)}$ is the inverse of $f\arrowvert_{U_V}$ follows from 
+	\[
+	(f\circ f^\sharp) \arrowvert_{\im(f)}=\big(\pi_{\im(f)}\big)\arrowvert_{\im(f)}=\Id\arrowvert_{\im(f)}
+\] 
+Moreover, if $w \in U_W$, then $\pi_{\im(f)}(w)=0$ since $\im(f)\ds U_W$. Hence $f^\sharp(w)=f^\sharp(\pi_{\im(f)}(w))=0$ by Lemma \ref{lem:pseudo-inverse}
+\end{proof}
+Our next order of business is to give an explicit description of the set $\Pi(f)$ of pseudo-inverses to $f$. We begin by showing that we can describe the complements $U_V$ and $U_W$ solely by using the maps $f$ and $f^\sharp$:
+\begin{lemma}\label{lem:psim-ker}
+	Let $f^\sharp$ be the pseudo-inverse to $(U_V,U_W,f)$. Then $U_V=\im(f^\sharp)$ and $U_W=\ker(f^\sharp)$
+\end{lemma}
+
+\begin{proof}
+	We have $\im(f^\sharp)\subset U_V$ by Definition \ref{def:ps} . Moreover, $f^\sharp$ is a composition of surjections and hence itself surjective, proving the first claim.\\
+	To prove the second claim, note that the second condition of Lemma \ref{lem:pschar2} immediately implies that $U_W\subset \ker(f^\sharp)$. We can also show the other inclusion by assuming that $w\in W$ satisfies $f^\sharp(w)=0$, in which case $\pi_{\im(f)}(w)=f(f^\sharp(w))=f(0)=0$, implying that $w$ lies in the component $U_W$ of the decomposition $\im(f)\ds U_W=W$ as required
+\end{proof}
+
+Taking the above lemma one step further allows us to describe the set $\Pi(f)$ of pseudo-inverses as promised:
+
+\begin{lemma}\label{lem:charpi}
+	Let $f \in \Hom(V,W)$. Then the following are equivalent:
+	\begin{enumerate}
+	\item $g \in \Pi(f)$
+	\item $(f\circ g)\arrowvert_{\im(f)}=\Id$ and $(g\circ f)\arrowvert_{\im(g)}=\Id$ 
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Let $g$ be a pseudo-inverse to $f$ and define $U_V\define\im(g)$ and $U_W\define\ker(f)$. Then Lemma \ref{lem:psim-ker} shows that $g$ is in fact the pseudo-inverse to the triple $\big(U_V,U_W,f\big)$. Now, since $g\arrowvert_{\im_(f)}$ is the inverse to $f\arrowvert_{U_V}$ by Lemma \ref{lem:pschar2}, we have $(f \circ g)\arrowvert_{\im(f)}=\Id$ and $(g \circ f)\arrowvert_{\im(g)}=(g \circ f)\arrowvert_{U_V}=\Id$.\\
+	Conversely, assume that $g$ satisfies the conditions in (2).\\
+	We begin by showing that $\big(\im(g),\ker(g)\big) \in \Lambda(f)$. Let's show  that $\im(f)\ds \ker(g)=W$ by way of example. Indeed, first note that $\im(f)\cap \ker(g)=0$, as any $w$ in this intersection must satisfy $w=(f\circ g)(w)=f(0)=0$. Moreover, if we write $w=\big(w-f( g(w))\big)+f ( g(w)\big)$, we see that trivially $f(g(w))\in \im (f)$ and \[
+	g(w-f(g(w)))=g(w)-(g(f(g(w))=g(w)-g(w)=0
+	\]
+	so that $\big(w-f(g(w))\big) \in \ker(g)$. This indeed shows that $\im(f)\ds \ker(g)=W$. The proof of $\im(g)\ds \ker(f)=V$ is completely analogous, allowing us to conclude that $(\im(g),\ker(g))\in \Lambda(f)$.\\
+	It now remains to show that $g$ is indeed a pseudo-inverse to the triple $(\im(g),\ker(f),f)$. By Lemma \ref{lem:pschar2}, it suffices to show that $g\arrowvert_{\im(f)}$ is the inverse to $f\arrowvert_{\im(g)}$ and that $g\arrowvert_{\ker(g)}=0$. The first claim follows immediately from the fact that $g$ is a left inverse to $f:\im(g)\mor W$ and the second claim is trivial.
+\end{proof}
+
+\noindent In order to summarize the previous 2 lemmas, we introduce the following assignment, which is well-defined by Lemma \ref{lem:psim-ker}
+
+\[
+\Psi: \Pi(f)\mor \Lambda(f): g\fun \big(\im(g),\ker(g)\big)
+\]
+We now have:
+\begin{lemma}\label{lem:psinverses}
+	Let $f \in \Hom(V,W)$. Then:
+	\begin{itemize}
+		\item 
+		$\Pi(f)=\big\{ g \in \Hom(W,V)\,\,\big\vert\,\, (f\circ g)\arrowvert_{\im(f)}=\Id$ \textrm{ and } $(g\circ f)\arrowvert_{\im(g)}=\Id \big\} $
+		\item The assignments $\Phi$ and $\Psi$ define 1:1 correspondences between $\Lambda(f)$ and $\Pi(f)$
+	\end{itemize}
+\end{lemma}
+
+
+\begin{proof}
+	The first claim simply restates Lemma \ref{lem:charpi}. To prove the second, we note that $\Psi\circ \Phi=\Id$  by Lemma \ref{lem:psim-ker}. Moreover, $\Phi$ is surjective by definition, implying that $\Phi\circ \Psi =\Id$ as well
+\end{proof}
+
+
+
+\noindent We finish our discussion of pseudo-inverses by discussing a special choice of pseudo-inverse in $\Pi(f)$ that one can make if the vector spaces $V$ and $W$ are equipped with inner products. Indeed, recall the following standard result:
+
+\begin{lemma}
+ Let $U \subset V$ be a subspace of a finite dimensional inner product space. Then $U\ds U^{\perp}=V$
+\end{lemma}
+
+This leads us to the following Definition:
+\begin{definition}\label{def:mpinverse}
+Let $V,W$ be finite-dimensional inner product spaces and let $f \in \Hom_\d{R}(V,W)$. Then the \emph{Moore-Penrose pseudo-inverse} is the pseudo-inverse to the triple $(\ker(f)^\perp,\im(f)^\perp,f)$.\\ We will denote it by $f^+$
+\end{definition}
+
+\noindent It turns out that we can give a very satisfying description of Moore-Penrose pseudo-inverses:
+
+\begin{lemma}\label{lem:mppschar}
+	Let $V, W$ be finite-dimensional inner product spaces and $f \in \Hom(V,W)$. Then the following are equivalent:
+	\begin{enumerate}
+		\item $g$ is the Moore-Penrose pseudo-inverse $f^+$ to $f$
+		\item $g$ is a pseudo-inverse to $f$ and $g\circ f$ and $f \circ g$ are self-adjoint linear maps
+		\item $f$ and $g$ satisfy $f\circ g \circ f=f$, $g\circ f\circ g =g$,  $(g\circ f)^*=g\circ f$ and $(f\circ g)^* =f\circ g$
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	The equivalence $(2)\iff (3)$ is simply a restatement of Lemma \ref{lem:psinverses}.\\
+	We now prove $(2)\implies (1)$:\\
+	Assume that $g$ is a pseudo-inverse to $f$ and that $g\circ f$ and $f \circ g$ are both self-adjoint. then Lemma \ref{lem:psim-ker} implies that $g$ is the pseudo-inverse to the triple $\big(\im(g),\ker(f),f\big)$. The claim will thus follow if we show that $\im(g)=\ker(f)^\perp$ and $\ker(g)=\im(f)^\perp$. By way of example, we will prove the former equality: First note that since $\im(g)\ds \ker(f)=V$, it suffices to show that $\im(g)\perp \ker(f)$. Indeed, for $w \in W$ and $v \in \ker(f)$, we have: 
+	\[
+	\bl{v}{g(w)}=\bl{v}{(g\circ f)(g(w))}=\bl{(g\circ f)^*(v)}{g(w)}=\bl{(g\circ f)(v)}{g(w)}=\bl{g(0)}{g(w)}=0
+	\]
+	The proof of $\ker(g)=\im(f)^\perp$ is analogous.\\
+	Finally, we show $(1)\implies (2)$:\\
+	Assume that $g$ is the Moore Penrose pseudo-inverse to $f$. Ie $g$ is the  pseudo-inverse to the triple $(\ker(f)^\perp,\im(f)^\perp,f)$. We will show that $(f\circ g)$ is self-adjoint and leave the other claim to the reader. To this end, let $v,v' \in V$. Then
+	\begin{align*}
+	\bl{v}{g(f(v'))}&=\bigg\langle v-g(f(v))+g(f(v)), g(f(v'))-v'+v'\bigg\rangle\\
+	&= \bigg\langle v-g(f(v)), g(f(v'))\bigg\rangle+\bigg\langle g(f(v)),g(f(v'))-v'\bigg\rangle+\bigg\langle g(f(v)), v'\bigg\rangle
+	\end{align*}
+	Now, since $f\circ g\circ f=f$, we conclude that $v-g(f(v))$ and $g(f(v'))-v'$ lie in $\ker(f)$. Moreover, since $\ker(f)=\im(g)^\perp$, we conclude that 
+	\[
+	\bl{v-g(f(v))}{g(f(v'))}=\bl{g(f(v))}{g(f(v'))-v'}=0
+	\]
+	So that 
+	\[
+	\bl{v}{g(f(v'))}=\bl{g(f(v))}{v'}
+	\] implying that $f\circ g=(f\circ g)^*$. The equality $g\circ f = (g\circ f)^*$ is completely analogous.
+\end{proof}
+
+As mentioned in the introduction of this section, our main motivation for studying the Moore-Penrose pseudo-inverse, is to provide a description of the projection of a vector onto the image of a linear map. We begin with the following preparatory lemma:
+
+
+
+\begin{lemma}\label{lem:proj=mppsinverse}
+	Let $V,W$ be finite-dimensional inner product spaces and  $f \in \Hom(V,W)$. Let $v \in V$ and $w\in W$. Finally denote the Moore-Penrose inverse of $f$ by $f^+$. Then the following are equivalent:
+	\begin{enumerate}
+		\item $f(v)$ is the projection of $w$ onto the subspace $\im(f)$
+		\item $v$ satisfies the normal equation $(f^*\circ f)(v)=f^*(w)$
+		\item $v$ lies in the affine subspace $f^+(w) + \ker(f)$
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	The equivalence of $(1)\iff (2)$ is simply a restatement of Lemma \ref{lem:normaleq}.\\
+	To show the equivalence of $(1)\iff (3)$, we first note that $f(f^+w))=\pi_{\im(f)}$, where $\pi_{im(f)}$ is the projection onto the subspace $\im(f)\subset W$ by Lemma \ref{lem:projcoincide}. This shows that the vector $f^+(w) \in V$ indeed satisfies the condition $(1)$. Next, assume (1), so that $v \in V$ satisfies $f(v)=\pi_{\im(f)}(v)$ and write $v= f^+(w)+v'$. Then\[
+	f(v)=\pi_{\im(f)(w)}\iff f(f^+(w)+v')=\pi_{\im(f)}(w)\iff \pi_{\im(f)}(w)+f(v')=\pi_{\im(f)}(w)\iff v'\in \ker(f)
+	\]
+	This proves the claim
+\end{proof}
+
+This lemma has an interesting corollary which allows us to write the Moore-Penrose even more explicitly which will play an important role later on:
+
+\begin{corollary}\label{cor:psinverse-injective}
+Let $V$ be a finite dimensional vector space and $W$ a finite dimensional inner product space. Let $f \in \Hom(V,W)$ be injective and choose \emph{any} inner product on $V$. Then
+\[
+f^+ = (f^*\circ f)^{-1}\circ f^*
+\] 
+\end{corollary}
+
+\begin{proof}
+	Since $f$ is injective (so that $\ker(f)=0$), $f^+$ is the pseudo-inverse to the triple $(V,\im(f)^{\perp},f)$ by Definition \ref{def:mpinverse}. It follows immediately that this condition is independent of the inner product on $V$. To prove the formula, simply note that $f^*\circ f$ is invertible if $f$ is injective and apply the second criterium of Lemma \ref{lem:proj=mppsinverse}
+\end{proof}
+
+
+\noindent We finish this section by giving a more explicit description of this map after introducing coordinates:\\
+To this end, let $\big\{v_1,\ldots ,v_n \big\}$ be an orthonormal basis for $V$ and $\big\{w_1,\ldots, w_m\big\}$ be an orthonormal basis for $W$. We denote by $M: \Hom(V,W)\mor \Mat_{n\times m}(\d{R})$ the isomorphism that assigns to any $f \in \Hom_\d{R}(V,W)$ its associated matrix $M_f$.
+
+\begin{lemma}\label{lem:mppscoordinates}
+	For any $f$, we have $M_{f^+}=\big( M_f\big)^+$ where $ \big(M_f\big)^+$ is the unique matrix $M$ satisfying
+	\begin{itemize}
+		\item $M\cdot M_f \cdot M=M$ and $M_f \cdot M \cdot M_f=M_f$
+		\item $M\cdot M_f$ and $M_f \cdot M$ are symmetric
+	\end{itemize}
+\end{lemma}
+
+\begin{proof}
+	The first claim follows from the compatibility between composition of maps and multiplication of matrices. The second follows from the fact that the inner product is the standard one since the bases are orthonormal
+\end{proof}
+
+\chapter{Convex Analysis}
+
+
+
+\section{Overview}
+One major aspect of machine learning is the study of \emph{supervised learners}. \\
+For these algorithms one is given a space of \emph{features} $\f{X}$ together with a space of \emph{labels} $\f{y}$ -the underlying idea being that to each feature $x \in \f{X}$, one can attach its correct label $y \in \f{y}$.\\ 
+In order to do this, One first considers a \emph{hypothesis space} $\f{H}$ of functions $\f{X}\mor \f{y}$ which consist of all the ways one wishes to make a prediction, and collects a \emph{dataset} $\Delta \in \f{X}\times \f{y}$.\\
+ Using this dataset , one in turn defines a cost function $c: \f{H}\mor \d{R}$ which intuitively describes how accurate any chosen hypothesis $h \in \f{H}$ is. The appropriate $h$ hypothesis will then be the one that minimizes this cost function.\\\\
+As such the problem of finding minima for functions plays a key role in the field of machine learning.\\
+Arguably, the most popular approach to this problem is to construct a sequence of hypotheses $x_i \in \f{H}$ which decreases the cost function $c$ at each step and hopefully converges to this global minimum. One particularly elegant way of constructing such a sequence is the method of gradient descent.\\
+In this chapter, we investigate this method and prove that it is indeed descending and converging to a global minimum under certain circumstances. Along the way, we give a bound for the error at each iteration.
+\newpage
+\section{Background and Notation}
+In this context, the hypothesis space $\f{H}$ will be a Hilbert space, i.e. a real vector space $V$, together with an inner product $\bl{-}{-}$ such that the associated norm $\norm{x}\define \sqrt{\bl{x}{x}}$  is complete. For the reader not comfortable with the language of Hilbert spaces,  we assure him it is safe to assume that $V$ is finite-dimensional, in which case the Gram-Schmidt algorithm exhibits an orthonormal basis, and shows in particular that  $V$ is isomorphic to $\d{R}^n$, together with the usual inner product $\bl{x_1,\ldots , x_n}{y_1,\ldots y_n}\define \sum_i x_iy_i$.\\
+
+\noindent We recall that given Hilbert spaces $V$ and $W$, we denote by $\Hom_\d{R}(V,W)$ the vector space of continuous and linear functions\footnote{in the case where $\dim V\neq \infty$, any linear map is automatically continuous so that the latter condition becomes superfluous}. In particular if $W=\d{R}$, we define $V^\star=\Hom_{\d{R}}(V,\d{R})$.  Moreover, for each element $x \in V$, we can consider $\bl{x}{-}:V\mor \d{R}$ which is clearly linear and continuous. This in turn defines a map $V\mor V^\star:x\mapsto \bl{x}{-}$ and it is a well known fact from the theory of Hilbert spaces that this map is an isomorphism.\\
+\section{Subgradients}
+We begin our analysis of gradient descent sequences by analyzing the role of convexity in minimizing functions. To this end, recall that:
+\begin{definition}
+A function $f:V\mor \d{R}$ is \emph{convex} if for any $x,y$ and $\alpha \in [0,1]$, we have
+\[
+f(\alpha x+(1-\alpha)y)\le \alpha f(x')+(1-\alpha)f(y)
+\]	
+\end{definition}
+
+\noindent Our main reason for considering this property is the following characterization of the gradient:
+\begin{theorem}\label{thm:gradient=subgradient}
+Let $f:V\mor \d{R}$ be differentiable at $x$ and convex.\\
+Then the gradient is the only vector $\nabla f(x) \in V$ satisfying
+\begin{equation}\label{ineq:subgradient}
+f(y)-f(x)\ge \bl{\nabla f(x)}{ y-x}
+\end{equation}
+for all $y \in V$
+\end{theorem}
+
+\begin{proof}
+\noindent First, we show that the statement is true for the vector $\nabla f(x)$:\\
+By lemma \ref{lem:eq_defs_diff}, given $\epsilon>0$, for any $\vert \vert y-x \vert \vert <\delta $, we have
+\[
+\frac{\vert f(y)-f(x)-\Dir_x f(v) \vert }{\vert\vert y-x\vert\vert}= \frac{\vert f(y)-f(x)- \bl{\nabla f(x)}{y-x} \vert }{\vert\vert y-x\vert\vert}<\epsilon
+\]
+Removing the absolute values and reorganizing yields that
+\[
+f(y)-f(x)-\epsilon\vert \vert y-x\vert \vert \ge \bl{\nabla f(x)}{y-x}
+\]
+for all $y$ in some ball $B(x,\delta)$.\\
+ We  now use the convexity of $f$ to show this in fact holds for \emph{any} $y \in V$. Since $\epsilon >0$ was chosen arbitrarily, the inequality (\ref{ineq:subgradient}) will follow immediately. \\
+To this end, for any $y \in V$, consider the function
+\begin{equation}\label{eq:gradient}
+\psi(y)\define  f(y)-f(x)-\epsilon\vert\vert y-x\vert \vert - \bl{\nabla f(x)}{y-x}
+\end{equation}
+Equation (\ref{eq:gradient}) states that $\psi(y)\ge 0$ whenever $y \in B(x,\delta)$. We must now show that $\psi (y)\ge 0$ for arbitrary $y \in V$.\\
+We leave it to the reader to verify that $\psi$ itself is convex and note that it is trivial that $\psi(x)=0$.\\ 
+Now, pick $\alpha< \frac{\delta}{\vert \vert y-x\vert \vert }$ small enough so that $\alpha y+(1-\alpha )x \in B(x,\delta)$. Then by convexity, we have:
+\[
+\alpha \psi(y)=\alpha \psi(y)+(1-\alpha)\psi(x)\ge \psi\big(\alpha y+(1-\alpha)x\big)\ge 0
+\]
+It follows in particular that $\psi(y)\ge 0$, hence the existence.\\
+To show that $\nabla f(x)$ is the unique vector satisfying the inequality (\ref{ineq:subgradient}), we assume  that $v \in V$ satisfies
+\[
+f(y)-f(x)\ge \bl{v}{ y-x}
+\]
+And conclude that
+\[
+\frac{\bl{ v-\nabla f(x)}{y-x} }{\vert \vert y-x \vert\vert }\le \frac{f(y)-f(x)-\bl{\nabla f(x)}{y-x} }{\vert \vert y-x \vert\vert }\le \frac{\vert f(y)-f(x)-\bl{\nabla f(x)}{(y-x)}\vert }{\vert \vert y-x\vert \vert}
+\]
+The differentiability of$f$ at $x$ now implies that for any $\epsilon>0$
+\[
+\frac{\bl{ v-\nabla f(x)}{y-x} }{\vert \vert y-x \vert\vert }<\epsilon
+\]
+for all $y$ in some ball $B(x,\delta)$. Using the cosine rule we conclude  that \[\frac{\bl{ v-\nabla f(x)}{y-x}}{\vert \vert y-x\vert \vert}=\vert \vert v-\nabla f(x)\vert \vert  \cdot \cos(\theta)<\epsilon\]
+
+Where $\theta$ denotes the angle between $v$ and $\nabla f(x)$ which immediately implies that $v=\nabla f(x)$, as $\epsilon$ was chosen arbitrarily.
+\end{proof}
+
+\noindent This characterization allows us to introduce gradients in the more general setting of convex, non-differentiable functions:
+\begin{definition}
+Let $f:V\mor \d{R}$ be a convex function. The \emph{subgradient} at $x$ is the set $\partial f(x)$ of all vectors $v \in V$ such that 
+\[
+f(y)-f(x)\ge \bl{v}{ y-x}
+\]	
+for any $y \in V$
+\end{definition}
+
+\noindent The above theorem shows that in the case where $f$ is differentiable, we have
+\[
+\partial f(x)=\{\nabla f(x)\}
+\]
+A crucial theorem in the theory of convex optimization is:
+\begin{theorem}
+Let $f:V \mor \d{R}$ be convex, then the subgradient is a nonempty set.	
+\end{theorem}
+
+\noindent The interpretation of the subgradient is rather powerful, as the next two results are easily proven:
+\begin{lemma}\label{lem:stationary_point=global_minimum}
+Let $f:V\mor \d{R}$ be convex and differentiable everywhere. Then
+\begin{itemize}
+\item any local minimum is a global one
+\item Any stationary point is an either a global minimum or maximum	
+\end{itemize}
+\end{lemma}
+
+\begin{proof}
+To prove the first point, we use a standard argument already used in \ref{thm:gradient=subgradient}:
+If $f(y)\ge f(x)$ for all $y$ in some ball $B(x,\delta)$, then we pick $\alpha<\frac{\delta}{\vert \vert y-x \vert\vert }$ small enough so that $\alpha y+(1-\alpha)x \in B(x,\delta)$, then using convexity, we obtain:
+\[
+\alpha f(y)+(1-\alpha)f(x)\ge f(\alpha y+(1-\alpha)x)\ge f(x)
+\]
+Which immediately proves the first claim.\\
+\noindent For the second, if $\nabla f(x)=0$, then using the fact that $\nabla f(x)$ is the subgradient, for any $y \in V$, we have
+\[
+f(y)\ge f(x)-\nabla f(x)(y-x)=f(x)
+\]
+\end{proof}
+
+We now  go on to prove an important inequality in a certain setting, which in some sense provides a converse to inequality (\ref{ineq:subgradient})
+
+\begin{lemma}
+Assume $f$ is convex and differentiable everywhere. Moreover, assume the gradient satisfies the Lipschitz condition:
+\[
+\vert  \nabla f(y)-\nabla f(x) \vert \le K\cdot \vert \vert y-x\vert \vert 
+\]	
+Then for any $x,y \in V$, we have
+\[
+f(x)+\nabla f(x)(y-x) \le f(y)\le f(x)+\bl{\nabla f(x)}{y-x} + K \cdot \vert \vert y-x\vert \vert ^2
+\]
+\end{lemma}
+
+\begin{proof}
+The left hand side of the inequality is simply the subgradient inequality (\ref{ineq:subgradient}).\\
+To prove the right-hand side we once again use the subradient inequality (\ref{ineq:subgradient}) to compute:
+\begin{align*}
+f(y)-f(x)-\bl{\nabla f(x)}{y-x}&\le f(y)-\bigg(f(y)+\bl{\nabla f(y)}{x-y}\bigg)-\bl{\nabla f(x)}{y-x}\\
+&=\bl{\nabla f(y)-\nabla f(x)}{y-x}\\
+&\le \vert \vert \nabla f(y)-\nabla f(x)\vert \vert \cdot \vert \vert y-x\vert \vert\\
+&\le K\cdot \vert \vert y-x\vert \vert ^2
+\end{align*}
+
+\end{proof}
+
+\section{Gradient descent sequences}
+
+Given a function $f:V\mor W$ and a point $x\in V$, we say that $f$ is \emph{differentiable} at $x$ if for each $v \in V$, the \emph{directional derivative}
+
+\[
+\Dir_xf(v)\define \lim_{\lambda \to 0}\frac{f(x+\lambda v)-f(x)}{\lambda}
+\]
+
+\noindent is defined for any $v \in V$  and  that  $\Dir_xf(-):V\mor W$ is linear and continuous. A classical result in analysis is the folllowing:
+\begin{lemma}\label{lem:eq_defs_diff}
+A function is differentiable at $x$ iff there exists a linear map $L_x \in \Hom_\d{R}(V,W)$ such that
+\[
+\lim_{\vert \vert v \vert \vert \mor 0}\frac{\vert \vert f(x+v)-f(x)-L_x(v)\vert \vert}{\vert \vert v\vert \vert}=0
+\]
+In which case $L_x=\Dir_xf$
+\end{lemma}
+Furthermore, if $W=\d{R}$, we can make the following observation:
+
+\begin{lemma}
+Assume that $f:V\mor \d{R}$ is differentiable. Then there exists a unique element $\nabla f(x) \in V$ such that 
+\[
+\Dir_xf(-)=\bl{\nabla f(x)}{-}
+\]
+\end{lemma}
+ \begin{proof}
+ Since $\Dir_xf$ lies in $V^\star$ by the definition of differentiability and since the map \[V\mor V^*:x\mor \bl{x}{-} \]	is an isomorphism, the result follows.
+ \end{proof}
+
+\begin{definition}
+Let $f: V\mor \d{R}$ be differentiable. The function \[\nabla f:  V\mor V: x\fun \nabla f(x)\] is the \emph{gradient} of $f$.
+\end{definition}
+ The gradient has another interesting interpretation. To this end, for any $x$, we define the direction $\overline{x}$ of $x$ as the class under the equivalence relation $x\sim y \iff \d{R}^+x=\d{R}^+y$. 
+\begin{remark}
+The direction of $\nabla f(x)$ yields the minimal directional derivative. Indeed, for any other direction $\overline{Y}$ represented by a unit vector $y$, we compute
+\[
+ \Dir_xf(y) =  \bl{\nabla f(x)}{ y} =\vert \vert \nabla f(x)\vert \vert \cdot \vert \vert y \vert \vert \cos(\theta)=\vert \vert \nabla f(x) \vert \vert \cdot \cos \theta
+\] 
+where $\theta$ denotes the angle between $x$ and $y$. This minimum is attained when $\cos(\theta)=-1$, in other words for any vector of direction $-\nabla f(x)$, by a simple application of the Cauchy-Schwarz theorem 
+\end{remark}
+
+\noindent This observation motivates gradient descent.\\
+ Indeed, as mentioned in the Overview, our goal is to minimize the function $f$. One approach would be to begin with any choice of starting point $x_0$ and subsequently build a sequence in such a way that the direction of any vector $x_{i+1}-x_i$ is $\nabla f(x_i)$, the minimal directional derivative.
+\begin{definition}
+A gradient descent sequence is a sequence $(x_i)_{i \in \d{N}} \in V$ such that the direction of two subsequent elements satisfies
+\[
+\overline{x_{i+1}-x_i}=\overline{\nabla f(x_i))}
+\]
+In this case, we necessarily have \[x_{i+1}=x_i-\lambda_i\nabla f(x_i)\]
+\noindent We call $(\lambda_i)_i$ the sequence of \emph{learning rates.}
+\end{definition}
+\noindent This chapter is concerned with understanding when gradient descent sequences converge. The main result here being that in the case where $f$ is differentiable and convex, $\delta f$ is a Lipschitz function with constant $K$ and the learning rates are constant such that $\lambda \le \frac{1}{K}$, we can describe the convergence rather well.
+
+\section{Subgradients}
+We begin our analysis of gradient descent sequences by analyzing the role of convexity in minimizing functions. To this end, recall that:
+\begin{definition}
+A function $f:V\mor \d{R}$ is \emph{convex} if for any $x,y$ and $\alpha \in [0,1]$, we have
+\[
+f(\alpha x+(1-\alpha)y)\le \alpha f(x')+(1-\alpha)f(y)
+\]	
+\end{definition}
+
+\noindent Our main reason for considering this property is the following characterization of the gradient:
+\begin{theorem}\label{thm:gradient=subgradient}
+Let $f:V\mor \d{R}$ be differentiable at $x$ and convex.\\
+Then the gradient is the only vector $\nabla f(x) \in V$ satisfying
+\begin{equation}\label{ineq:subgradient}
+f(y)-f(x)\ge \bl{\nabla f(x)}{ y-x}
+\end{equation}
+for all $y \in V$
+\end{theorem}
+
+\begin{proof}
+\noindent First, we show that the statement is true for the vector $\nabla f(x)$:\\
+By lemma \ref{lem:eq_defs_diff}, given $\epsilon>0$, for any $\vert \vert y-x \vert \vert <\delta $, we have
+\[
+\frac{\vert f(y)-f(x)-\Dir_x f(v) \vert }{\vert\vert y-x\vert\vert}= \frac{\vert f(y)-f(x)- \bl{\nabla f(x)}{y-x} \vert }{\vert\vert y-x\vert\vert}<\epsilon
+\]
+Removing the absolute values and reorganizing yields that
+\[
+f(y)-f(x)-\epsilon\vert \vert y-x\vert \vert \ge \bl{\nabla f(x)}{y-x}
+\]
+for all $y$ in some ball $B(x,\delta)$.\\
+ We  now use the convexity of $f$ to show this in fact holds for \emph{any} $y \in V$. Since $\epsilon >0$ was chosen arbitrarily, the inequality (\ref{ineq:subgradient}) will follow immediately. \\
+To this end, for any $y \in V$, consider the function
+\begin{equation}\label{eq:gradient}
+\psi(y)\define  f(y)-f(x)-\epsilon\vert\vert y-x\vert \vert - \bl{\nabla f(x)}{y-x}
+\end{equation}
+Equation (\ref{eq:gradient}) states that $\psi(y)\ge 0$ whenever $y \in B(x,\delta)$. We must now show that $\psi (y)\ge 0$ for arbitrary $y \in V$.\\
+We leave it to the reader to verify that $\psi$ itself is convex and note that it is trivial that $\psi(x)=0$.\\ 
+Now, pick $\alpha< \frac{\delta}{\vert \vert y-x\vert \vert }$ small enough so that $\alpha y+(1-\alpha )x \in B(x,\delta)$. Then by convexity, we have:
+\[
+\alpha \psi(y)=\alpha \psi(y)+(1-\alpha)\psi(x)\ge \psi\big(\alpha y+(1-\alpha)x\big)\ge 0
+\]
+It follows in particular that $\psi(y)\ge 0$, hence the existence.\\
+To show that $\nabla f(x)$ is the unique vector satisfying the inequality (\ref{ineq:subgradient}), we assume  that $v \in V$ satisfies
+\[
+f(y)-f(x)\ge \bl{v}{ y-x}
+\]
+And conclude that
+\[
+\frac{\bl{ v-\nabla f(x)}{y-x} }{\vert \vert y-x \vert\vert }\le \frac{f(y)-f(x)-\bl{\nabla f(x)}{y-x} }{\vert \vert y-x \vert\vert }\le \frac{\vert f(y)-f(x)-\bl{\nabla f(x)}{(y-x)}\vert }{\vert \vert y-x\vert \vert}
+\]
+The differentiability of$f$ at $x$ now implies that for any $\epsilon>0$
+\[
+\frac{\bl{ v-\nabla f(x)}{y-x} }{\vert \vert y-x \vert\vert }<\epsilon
+\]
+for all $y$ in some ball $B(x,\delta)$. Using the cosine rule we conclude  that \[\frac{\bl{ v-\nabla f(x)}{y-x}}{\vert \vert y-x\vert \vert}=\vert \vert v-\nabla f(x)\vert \vert  \cdot \cos(\theta)<\epsilon\]
+
+Where $\theta$ denotes the angle between $v$ and $\nabla f(x)$ which immediately implies that $v=\nabla f(x)$, as $\epsilon$ was chosen arbitrarily.
+\end{proof}
+
+\noindent This characterization allows us to introduce gradients in the more general setting of convex, non-differentiable functions:
+\begin{definition}
+Let $f:V\mor \d{R}$ be a convex function. The \emph{subgradient} at $x$ is the set $\partial f(x)$ of all vectors $v \in V$ such that 
+\[
+f(y)-f(x)\ge \bl{v}{ y-x}
+\]	
+for any $y \in V$
+\end{definition}
+
+\noindent The above theorem shows that in the case where $f$ is differentiable, we have
+\[
+\partial f(x)=\{\nabla f(x)\}
+\]
+A crucial theorem in the theory of convex optimization is:
+\begin{theorem}
+Let $f:V \mor \d{R}$ be convex, then the subgradient is a nonempty set.	
+\end{theorem}
+
+\noindent The interpretation of the subgradient is rather powerful, as the next two results are easily proven:
+\begin{lemma}\label{lem:stationary_point=global_minimum}
+Let $f:V\mor \d{R}$ be convex and differentiable everywhere. Then
+\begin{itemize}
+\item any local minimum is a global one
+\item Any stationary point is an either a global minimum or maximum	
+\end{itemize}
+\end{lemma}
+
+\begin{proof}
+To prove the first point, we use a standard argument already used in \ref{thm:gradient=subgradient}:
+If $f(y)\ge f(x)$ for all $y$ in some ball $B(x,\delta)$, then we pick $\alpha<\frac{\delta}{\vert \vert y-x \vert\vert }$ small enough so that $\alpha y+(1-\alpha)x \in B(x,\delta)$, then using convexity, we obtain:
+\[
+\alpha f(y)+(1-\alpha)f(x)\ge f(\alpha y+(1-\alpha)x)\ge f(x)
+\]
+Which immediately proves the first claim.\\
+\noindent For the second, if $\nabla f(x)=0$, then using the fact that $\nabla f(x)$ is the subgradient, for any $y \in V$, we have
+\[
+f(y)\ge f(x)-\nabla f(x)(y-x)=f(x)
+\]
+\end{proof}
+
+We now  go on to prove an important inequality in a certain setting, which in some sense provides a converse to inequality (\ref{ineq:subgradient})
+
+\begin{lemma}
+Assume $f$ is convex and differentiable everywhere. Moreover, assume the gradient satisfies the Lipschitz condition:
+\[
+\vert  \nabla f(y)-\nabla f(x) \vert \le K\cdot \vert \vert y-x\vert \vert 
+\]	
+Then for any $x,y \in V$, we have
+\[
+f(x)+\nabla f(x)(y-x) \le f(y)\le f(x)+\bl{\nabla f(x)}{y-x} + K \cdot \vert \vert y-x\vert \vert ^2
+\]
+\end{lemma}
+
+\begin{proof}
+The left hand side of the inequality is simply the subgradient inequality (\ref{ineq:subgradient}).\\
+To prove the right-hand side we once again use the subradient inequality (\ref{ineq:subgradient}) to compute:
+\begin{align*}
+f(y)-f(x)-\bl{\nabla f(x)}{y-x}&\le f(y)-\bigg(f(y)+\bl{\nabla f(y)}{x-y}\bigg)-\bl{\nabla f(x)}{y-x}\\
+&=\bl{\nabla f(y)-\nabla f(x)}{y-x}\\
+&\le \vert \vert \nabla f(y)-\nabla f(x)\vert \vert \cdot \vert \vert y-x\vert \vert\\
+&\le K\cdot \vert \vert y-x\vert \vert ^2
+\end{align*}
+
+\end{proof}
+
+This inequality forms the key to the gradient descent convergence theorem.
+\begin{theorem}[convergence of GD]
+Assume $f$ is differentiable and convex, and  that $\nabla f$ is Lipschitz with constant $K$. Assume $\lambda$ is a constant sequence of learning rates such that 
+\[\lambda <\frac{1}{K}\]. Assume that $f$ reaches a minimum at $x_\mu$. Then
+\begin{itemize}
+\item the sequence $\vert \vert x_{i+1}-x_i\vert \vert$ is square summable and converges to $x_\mu$
+\item  For $f^\mu\define f(x_\mu)$. We have the following bound:
+\[
+\vert f(x_i)-f^\mu \vert \le \frac{\vert \vert x_0-x_\mu \vert \vert }{ 2\lambda \cdot K}
+\]	
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+Let $x \in V$, $\lambda \in \d{R}$ and define $x^+\define x-\lambda \nabla f(x)$.\\
+\noindent then we compute:
+\begin{align*}
+	f(x^+)& \le f(x)+\bl{\nabla f(x)}{x^+-x}+K\vert \vert x^+-x\vert \vert^2\\
+	& = f(x)-\lambda \vert \vert \nabla f(x)\vert \vert^2 +K\lambda^2\vert \vert \nabla f(x)\vert \vert^2\\
+	&= f(x)-\big(\lambda- K\lambda^2\big)\cdot \vert \vert \nabla f(x)\vert \vert^2
+\end{align*}
+From this last in equality we can draw a few conclusions:
+\begin{itemize}
+\item	First, since $\lambda \le \frac{1}{K}$, we have $\lambda-K\lambda^2\ge 0$. In particular: 
+\[f(x^+)\le f(x)\]
+\item Next, rewriting, we see that
+\[
+\norm{\nabla f(x)}^2\le \frac{1}{K\lambda^2-\lambda}\bigg(f(x)-f(x^+)\bigg)
+\]
+Implying that for a gradient sequence $(x_i)_i$ (using telescopic sums), we have
+\[
+\sum_i^n \norm{x_{i+1}-x_i}^2 =\lambda^2 \sum_i^n \norm{\nabla f(x_i)}^2\le \frac{\lambda^2}{K\lambda^2-\lambda}\vert f(x_0)-f(x_n)\vert\le \frac{\lambda^2}{K\lambda-\lambda^2}\vert f(x_0)-f^\mu \vert  
+\]
+We conclude that the sequence $\norm{x_{i+1}-x_i}$ is square summable. Moreover, since the gradient is Lipschitz, it is continuous in particular. Hence
+\[
+0=\lim \nabla f(x_i)=\nabla f (\lim x_i))
+\]
+meaning that $\nabla f\big( \lim(x_i)\big)$ is a stationary point, hence the global minimum  $x_\mu$ by Lemma \ref{lem:stationary_point=global_minimum}
+\end{itemize}
+\noindent To prove the second bound, we first apply the subgradient inequality (\ref{ineq:subgradient}) to $x$: \[f(x)\le f(x_\mu)+\bl{\nabla f(x)}{x-x_\mu}\] to obtain
+\begin{align*}
+f(x^+)&\le \bigg( f(x_\mu)+\bl{\nabla f(x)}{x-x_\mu}\bigg)+(K\lambda^2-\lambda)\cdot \vert \vert \nabla f(x)\vert \vert^2	
+\end{align*}
+Now since $K$ and $\lambda$ are positive, we conclude $K\lambda^2-\lambda \ge \frac{\lambda}{2}$, so that
+\begin{align*}
+f(x^+)-f(x_\mu)&\le  f(x_\mu)+\bl{\nabla f(x)}{x-x_\mu}-(K\lambda^2-\lambda)\cdot \vert \vert \nabla f(x)\vert \vert^2	\\ 
+ & \le \frac{1}{2\lambda}\bigg(2\lambda \bl{\nabla f(x)}{x -x_\mu}-\lambda^2\vert \vert \nabla f(x)\vert \vert^2 \bigg)\\
+ & = \frac{1}{2\lambda}\bigg(\vert \vert x - x_\mu\vert \vert^2 -\big(\vert \vert x-x_\mu \vert \vert^2 -2\lambda \bl{\nabla f(x)}{x -x_\mu}+\lambda^2\vert \vert \nabla f(x)\vert \vert^2 \big)\bigg)\\
+ &=\frac{1}{2\lambda}\bigg(\vert \vert x-x_\mu\vert \vert^2-\vert \vert x-\lambda \nabla f(x)-x_\mu \vert \vert^2 \bigg)\\
+ &=\frac{1}{2\lambda}\bigg(\vert \vert x-x_\mu\vert \vert^2-\vert \vert x^+-x_\mu \vert \vert^2 \bigg)\\
+ \end{align*}
+We return to our gradient descent sequence $(x_i)_i$. Then
+\begin{align*}
+\sum_i f(x_{i+1})-f^\mu	& \le \sum_i \frac{1}{2\lambda}\bigg(\vert \vert x_i-x_\mu\vert \vert^2-\vert \vert x_{i+i}-x_\mu \vert \vert^2 \bigg)
+&= \frac{1}{2\lambda}\bigg(\vert \vert x_0-x_\mu\vert \vert^2-\vert \vert x_{i+1}-x_\mu \vert \vert^2 \bigg)
+&\le \frac{1}{2\lambda}\vert \vert x_0-x\vert\vert^2
+\end{align*}
+Moreover, since $f$ decreases with each iteration by the above, it follows that 
+\[k\cdot \big(f(x_n)-f^\mu\big)\le \sum^n_i f(x_i)-f^\mu
+\], implying that
+\[
+f(x_{n})-f^\mu\le \frac{\norm{x_0-x^*}^2}{2\lambda k}
+\]
+\end{proof}
+
+
+\chapter{Probability theory}
+\section{Overview}
+\begin{definition}\label{def:prob_probspace}
+
+\end{definition}
+
+
+\section{Sampling}
+\begin{convention}\label{conv:prob_univ}
+We will fix a probability space $(\textrm{U}, \r{U},P)$ and throughout any random variable will always have this as its domain
+\end{convention}
+
+\begin{definition}\label{def:sampling}
+Let $(\Omega,\r{F})$ be a measure space.\\
+Assume an underlying probability space with measure $P$( following conv \ref{conv:prob_univ}).\\
+The \emph{sample space} of $\Omega$ is the set 
+\[
+S\Omega\define \coprod_{i \in \d{N}}\Omega^i
+\]
+Together with the canonical $\sigma-$algebra.\\
+The space of random samples is
+\[
+RS\Omega\define  \coprod_{i \in \d{N}} \bigg\{(X_1,\ldots X_n)\vert \, X_i \textrm{ i.i.d }\sim P\bigg\}
+\] 
+We say that $(x_1\ldots x_n)$ is sampled from $P$ if it lies in the image of the canonical map
+\[
+\ev: \Omega\times RS\Omega\mor S\Omega: \bigg(\omega, \big(X_1,\ldots X_n\big)\bigg)\fun \bigg(X_1(\omega),\ldots X_n(\omega)\bigg)
+\]
+\end{definition}
+
+
+\begin{remark}\label{rem:prob_sampling-map}
+The above map $\ev: \Omega\times RS\Omega\mor S\Omega: $
+will be referred to as the sampling map
+\end{remark}
+\chapter{Statistics}
+
+
+\section{Overview}
+\begin{convention}\label{conv:stats_univ-prob}
+Throughout, we will fix a probability space $(U,\r{U},\mu)$
+\end{convention}
+\section{Statistical models}
+\begin{definition}
+Let $(\Theta, \r{O})$ and $(\Omega,\r{F})$ be measurable spaces.\\
+A Markov kernel (denoted $\Theta\implies \Omega$) is a map
+
+\[
+\Sigma: \Omega \times \r{F}\mor \d{R}
+\]
+Where for each $\theta \in \Theta$ the function $\Sigma(\theta,-)$ is a probability measure on $\Omega$ and for each $A \in\r{F}$, the function $\sigma(-,A)$ is $\r{O}$-measurable.\\
+If each probability measure $\Sigma(\theta,-)$ is dominated by the measure $\lambda$ (conv. \ref{conv:stats_univ-prob}), then we write $\Sigma(\theta,-)\define P_\theta$ and call it a \emph{statistical model}
+\end{definition}
+
+\begin{example}
+Let $(\Omega, \r{F})$ be a measurable space and consider the  space  of samples (def. \ref{def:sampling}) given by $S\Omega\define \coprod_{in \in\d{N}}\Omega^i$.\\
+Then we can define a statistical model $\Sigma: S\Omega \implies \Omega$ through
+\[
+\sigma\big((x_1,\ldots, x_n), A\big)=\frac{1}{n}\sum \card\big\{1_{A}(x_i)\big\}
+\]
+This is the descriptive statistical model of $(\Omega, \r{F})$\end{example}
+\subsection{the category Stat$(\Theta)$}
+The collection of statistical models on  the parameter space $\Theta$ naturally forms a category by defining a morphism as follows:
+
+
+
+\subsubsection{the pullback functor}
+
+\begin{definition}
+Let $p:\Theta'\mor \Theta$ be any map (we intuitively think of $p$ as focussing on a  property of $\Theta$).\\
+Let $\Sigma: \Theta\implies \Omega$ be a statistical model.\\
+Then we can define the push-forward of $\Sigma$ along $p$, denoted $p^*\Sigma$ as 
+\[
+p^*\Sigma: \Theta\times \r{F}\mor \d{R}: \big(\omega,A)\fun \Sigma\big(p(\omega), A\big)
+\]
+\end{definition}
+
+
+
+\subsection{Estimators}
+
+\noindent An important aspect of statistical models is that given a sample $x \in S\Omega$ we'd like to find a way to asociate a parameter $\theta \in \Theta$ (a process known as \emph{estimation}).\\
+To this end, we  recall definition \ref{prob:def.sampling} and introduce an \emph{estimation space} as a set $E$ and define:
+
+\begin{definition}\label{stats:def.estimators}
+An estimator for the statistical model $\Sigma$ is a sequence of functions
+\begin{displaymath}
+\xymatrix{
+S\Omega\ar[r]_{e} & E\ar[r]_p  & \Theta \cup \{\infty\}
+}
+\end{displaymath}
+such that the image of the composition lies in $\Theta$.\\
+Note that for any $\omega \in \Omega$, we immediately obtain a map $RS\Omega\mor \Theta$ from the random sample space given by
+\begin{displaymath}
+\xymatrix{
+S\ar[r]^e\Omega & E\ar[d]^p\\
+RS\ar[u]^{\ev_{\omega}}\ar[r]_{e_R}\Omega & \Theta\cup\{ \infty \}
+}
+\end{displaymath}
+\end{definition}
+
+\section{Bayesian models}
+
+
+\begin{definition}
+Let $(\Theta,\r{O})$ and $(\Omega,\r{F})$ be measurable spaces.
+A Bayesian model is a probability measure $\Pi$ on the measurable space $(\Theta\times \Omega, \r{O}\times\r{F})$
+\end{definition}
+
+\part{statistics}
+
+
+
+If a statistical model is dominated, one can consider the following map
+\[
+\MLE: \Sigma\mor \r{P}(\Omega):x \fun \argsup_\theta f(\theta,x)
+\]
+We call $L \in \Hom(\Sigma,\Omega$ a maximum likelihood estimator if $L(\theta)\in MLE$.
+\section{Bayesian Models}
+
+
+
+An important subset of statistical models are so-called Bayesian models in which one considers extra structure which lifts $(\Theta,\r{O})$ to a probability space itself. Assume we are given a probability measure $P$ on $(\Theta,\r{O})$, then together with the statistical model $P_\r{O}$, one can form the probability $\Pi\define P\rtimes P_\theta$ following theorem \ref{thm:integratemarkovkernel}  and since one can recover $P$ and $P_\theta$ from $\Pi$, it makes sense to define:
+\begin{definition}\label{def:stochasticmodel}
+A stochastic statistical model is a probability measure $\Pi$ on $\Theta\times \Sigma, \r{O}\times \r{S})$ which decomposes into $P\rtimes P_\r{O}$
+\end{definition}
+
+One can go one step further and demand this definition be symmetric:
+
+\begin{definition}\label{def:bayesianmodel}
+A Bayesian model  $\Pi$ is a probability measure on $\Theta\times \Sigma, \r{O}\times \r{S})$ which decomposes into $\mu \rtimes \nu_\r{O}$ and $\nu\rtimes \mu_\r{S}$	
+\end{definition}
+
+Before we go on, we wish to introduce a bit of abuse of notation in two steps. First we denote
+\[
+P(E)\define \mu(E)=\Pi(E\times \Sigma \,\,, P(F)\define \nu(F)=\Pi(\Theta\times F)
+\]
+where the second equalities come from lemma \ref{lemma:inteegratemarkovkernelmarginalprobability}. Following this principle we will always denote $\theta \times \Sigma$ simply by $\theta$ whenever the context is clear.
+The second step of abuse of notation is motivated by the case where the parameter space $\Theta$ is finite.\\
+
+\begin{lemma}
+Assume $\Theta$ and $\Sigma$ are finite spaces and let $\Pi$ be as in \ref{def:bayesianmodel}. Then
+\begin{itemize}
+\item $\mu_\r{S}(\theta,F)=\Pi(\theta\times \Sigma \vert \Theta\times F)\define P(\theta\vert F)$
+\item $P_\r{O}(E,x)=\Pi(E\vert x)$
+\end{itemize}
+\end{lemma}
+
+\begin{proof}
+By definition, we have
+\[
+\Pi(\theta \times F)=P(\theta\cup F)=\int_{\theta\times \Sigma} \mu_\r{S}(-,F)d\Pi=\mu_\r{S}(-,F)P(\theta)
+\]
+and vice versa.	
+\end{proof}
+
+Hence we will now denote the kernel $\mu_{S}(\theta , F)$ by $P(\theta \vert F)$ and $P_\r{O}(E,x)$ by $P(E\vert x)$
+
+We call $P(E)$ on $\Theta$ and $P(F)$ on $\Sigma$ the prior and predictive probabilities whereas $P(E\vert x)$ and $P(\theta\vert F)$ are the sampling and posterior kernels respectively.
+
+\begin{example}
+A good example to keep in mind is the following: assume we have a bunch of emails from people. We let $\Theta$ be the set of people, $\Sigma$ the set of words in the emails and $\Pi($Allen, work) be the number of times Allen has written the word 'work' (normalized). In this case the prior  $P$ is the number of words a person has written, the predictive $P$  is the number of people having written a given word. The sampling kernel $P$(work $\vert$ allen) is the probability among the words written by allen, we pick 'work' and the posterior probability $P$(Allen $\vert$ work ) is the probability that the word work was in fact written by Allen
+\end{example}
+ 
+We now assume that the Bayesian model is dominated (meaning that both the posterior and sampling kernel are dominated). 
+In this case it defines two estimators. The $MLE$ given by considering the distribution of kernel $P(- \vert \theta)$, written as $f_{x\vert \theta}$ as well as the maximum a posteriori estimate, given by considering
+\[
+MAP: \Sigma \mor \d{R}: x \fun \argsup_\theta f_{\theta \vert x}(\theta \vert x)
+\] 
+ 
+\section{Bayesian ML Learning} 
+ 
+Based off the Bayesian statistical model we described, one defines a Bayesian Machine learning  model in which one parametrizes \emph{data} by hypothesis.
+ Let $H\subset \Hom((\Theta,\r{O}),(\Sigma,\r{S}))$ be a finite set of \emph{hypothesis} endowed with the discrete $\sigma$-algebra. We consider  $D\subset \Theta\times \Sigma, \r{O}\times \r{S}$ as a space  of data.
+
+\begin{definition}
+A Bayesian ML model is a statistical model on $H\times D$	
+\end{definition}
+
+
+If we assume given a probability $P$ on $H$. Then there is a canonical way to define a Bayesian ML model by letting
+\[
+\Pi(h\times F)\define \mu(h)\delta_{h,F}
+\]
+where $\delta_{h,F}$ if the graph of $h$ lies in $F$ and zero else. We can this the noiseless model with prior $P$.
+
+\begin{lemma}
+Consider the above model. and let $VS_{H,F}$, the version space of $F$ be the set of all $h \in H$ whose graph lies in $F$. Then
+\begin{itemize}
+\item the prior is given by $P(h)$
+\item the sampling kernel is given by $P(E\vert h)=\Pi(F\vert h)=\delta_{h,F}$
+\footnote{recall that we identify $h with h\times D$ and $F$ with $H\times F$ implicitely}
+\item The predictive probability is	given by $P(F)= \mu(VS_H,F)$
+
+\item the posterior kernel is given by $\mu_\r{S}(h,D)=\Pi(h\vert D)=\frac{\delta_{h,F}P(h)}{\mu(VS_{H,F})}$
+\end{itemize}
+\end{lemma}
+
+We will also be interested in Bayesian ML models wich incorporate noise. Here one is not just interested in wanting $\Pi(h\times F)$ to only be nonzero if the graph of $f$ describes the data. Rather, one defines noise on space as a probability and keeps track of that. We are not sure how to formalize this in the the above context forn now.
+
+\section{Bayesian Networks}
+
+\begin{definition}
+Let $(\Omega,\r{A},P)$ be a probability space and $(X_i)_{v \in V}: \Omega\mor \Sigma$ a set of random variables.
+A Bayesian network is an acyclic	 quiver  $\Qvr$ with vertices $v$.\\
+\end{definition}
+Given a bayesian network and a node $i$, the parents of $i$ are all node with an arrow coming in to $i$.
+
+\begin{definition}
+We say that the random variables $X_v$ follow the Bayesian network $\Qvr$ if
+\[
+f_{X_1\wedge \ldots \wedge X_n}=\prod_i f_{X_i \vert \wedge X_{j, \textrm{j parent of i}}}\]
+\end{definition}
+In the case where the quiver consists of a single node $1$ and a single arrow to $2\ldots n$. We say the network is naive, so that
+\[
+P(A_1,\ldots A_n)=P(A_1)\prod_i P(A_i\vert A_1)
+\]
+
+Where we used the definition of the density function of conditioning one random variable wrt to another.
+\section{Naive Bayes}
+
+\begin{definition}
+We say that a Bayesian model $\Theta \times \Sigma$ 	is naive if $P(-\vert \theta)$ is given by a naieve bayes network.
+\end{definition}
+
+
+
+\section{Types of Bayesian Models}
+
+Let $P_\theta$ denote a statistical model. Let $\Qvr$ be a Bayesian quiver.
+
+\begin{definition}
+We say that a Bayesian model is of $P_\theta$-$\Qvr$ type if there exist random variables $X_i:\Omega	\mor \Sigma$ whose distributions lie in the family $P_theta$ who follow the Bayesian quiver $\Qvr$
+\end{definition}
+
+
+
+\subsection{A Naive Bernouilli Model}
+
+We consider the problem of classifiying text messages according to people. We let $\Theta$ be the space of people, let $V$, the vocabulary of words. We order these words to obtain $V^n$ and  let $\Sigma=\{0,1\}^n$ (so that a an element represents a text message containing the words corresponding to places with a 1). We assume the sampling probabilities are bernouilli distributed so that for $\theta \in \Theta$ there exist $\pi_theta \in [0,1]^n$ such that for a vector $x \in \Sigma$:
+\[
+P(x\vert \theta)\define \prod_i (\pi_\theta)_i^{x_i} (1-(\pi_\theta)_i^{(1-x_i)}
+\]
+We assume $\Theta$ has a prior distribution given by $P(\theta)$
+
+\begin{lemma}
+Let $\Pi$ be a finite Bayesian model with Bernouilli sampling distribution
+\[
+MAP(x)=\argmax_\theta \prod_i P(x_i\vert \theta)^{x_1}(1-P(x_i\vert \theta)^{1-x_i})P(\theta)
+\]
+\end{lemma}
+
+
+\begin{proof}
+Let $x \in \Sigma$. Since the model is naive we can assume
+\[
+P(x\cap \theta)=p(\theta)p(x\vert \theta)
+\]	
+so that it suffices to maximize $p(\theta)p(x\vert \theta)$
+Writing the binomial distribution out and taking $\ln$ yields
+\[
+\delta_{x,\sigma}\ln(\pi_{x,\theta})+(1-\delta_{x,\sigma})\ln(1-\pi_{x,\theta})+p(\theta)
+\]
+In order to maximize this, we view this as a function of the variable $\pi_{x,\theta}$ and compute the singular points to get
+\[
+\delta_{x,\sigma}(1-\pi_{x,\theta})-(1-\delta_{x,\sigma})\pi_{x,\theta}=0\iff \delta_{x,\sigma}=\pi_{x,\theta}
+\]
+
+\end{proof}
+
+
+
+\section{Estimators and Parameters}
+
+Arguably statistics is about the following problem: We are given a measurable function
+\[
+X:(\Omega, \r{F}, P)\mor (T,\r{T},\tau)
+\]
+and assume that $\tau$ dominates $P_X$ so that $P_X$ has a density function $f_X: (T,\r{T},\tau) \mor (\d{R},\r{L})$.\\
+We assume given a parameter space
+\[
+(\Theta, \r{G})\times T\mor \d{R}
+\]
+such that for each $\theta \in \Theta$, $f_\theta$ is a density function. and $f_X=f_\theta$ for some $\theta \in \Theta$ (called the parameter).\\
+An \emph{estimator of the random variable $X$} is a sequence of random variables
+\[
+\hat{\theta}_n:(\Omega,\r{F},P)\mor (\Theta, \r{G})
+\] 
+which has \emph{desirable properties.}
+\begin{center}
+The exact meaning of desirable properties explains the ambiguity of statistics. Since statistics is concerned with making conclusions based on a sample size $x_1,\ldots x_n$ of outcomes as opposed to $X$ itself, we shall only concern ourselves with definitions of this type
+\end{center}
+ 
+ 
+\subsection{Consistent Estimators}
+
+\begin{definition}
+An estimator $\hat{\theta}_n$ is consistent if it converges in probability to $\theta$ $\hat{\theta_n}\stackrel{P}{\mor} \theta$. I.e. for any choice $\epsilon$
+\[
+P(\vert \theta_n-\theta\vert <\epsilon)\stackrel{n\to \infty}{\mor} 1
+\]
+\end{definition}
+
+we have the following alternate characterization of constitency:
+
+\begin{lemma}
+The following are equivalent:
+\begin{itemize}
+\item the estimator $\hat{\theta_n}$ is consistent
+\item $E(\theta_n)=\theta$ and $\Var[\theta_n]=0$	
+\end{itemize}
+\end{lemma}
+
+\begin{proof}
+	
+\end{proof}
+ 
+ 
+\section{Maximum Likelihood Estimation}
+Let $(\Theta, \r{O})\Longrightarrow (\Omega, \r{F})$ be a statistical model. Taking associated density functions yields
+\[
+\Theta\times \Omega \mor \d{R}:(\theta,x)\fun f_\theta(x)
+\]
+Where $F_\theta$ is the density of the distribution $\theta$. We now assume given a set of points $(x_1,\ldots x_n)$.\\ The purpose of maximum likelihood estimation is to pick the parameter $\theta$ such that the \emph{'likelihood'} of the outcomes $x_i$ is maximized. More precisely, we consider the associated statistical model $(\Theta,\r{O})\Longrightarrow (\Omega^n,\r{F}^n)$, with associated density functions
+\[
+\Theta\times \Omega^n\mor \d{R}:(\theta,x_1\ldots x_n)\fun \prod_i f_\theta(x_i)
+\]
+
+
+Then the maximum likelihood is the function $\hat{\theta}:\Omega^n\mor \Theta$ given by
+\[
+\hat{\theta}(x_1\ldots x_n)=\max_{\theta\in \Theta} \prod_i f_\theta(x_i)
+\]
+whenever this maximum exists. For technical reasons, we sometimes compute the maximum  log-likelihood instead
+\[
+\max_\theta \sum_i \ln f_\theta(x_i)
+\]
+
+\begin{example} (a biased coin)
+Let $\Omega\define\{H,T\}\mor\{0,1\}$ be the random variable associated to throwing a coin in the air with $P$(heads)$=p$. Assume we repeat the experiment $n$ times to obtain the random variable. And let $X$ be the number of heads. Then $X$ is binomially distributed with success $p$. assume that after performing the experiment $X$, we obtain the number $i$ of heads. which $p$ yields the maximum likelihood?\\
+Well, $X$ is binomially distributed so that
+\[
+\ln f_p(k)=\ln(\binom{n}{k}p^k(1-p)^{n-k})=\ln\binom{n}{k}+k\ln(p)+(n-k)\ln(1-p) 
+\]
+setting the derivative with respect to $p$ to $0$ yields $p=\frac{n}{k}$ so that given an outcome of $i$ heads, $p=\frac{i}{n}$ yields the highest likelihood
+\end{example}
+
+\begin{example}
+Another example comes from logistical regression	
+\end{example}
+
+\subsection{Gauss' Principle} the techniaue of MLE can be used to motivate the normal (or Gaussian) distribution.
+\begin{definition}
+we say that a probability on $\d{R}$ is normally distributed if it is dominated by the Lebuesgue measure with density function
+\[
+\frac{1}{\sqrt{2\pi}}e^{\frac{-x^2}{2}}
+\]
+Or more generally after the change of variable $x\fun \frac{x-\mu}{\sigma}$
+\[
+\frac{1}{\sqrt{2\pi}}e^{\frac{-\frac{(x-\mu)}{\sigma}^2}{2}}
+\]
+\end{definition}
+\begin{lemma}
+if $X$ is normally distributed, then
+\begin{itemize}
+\item $X[X]=\mu$
+\item $S[X]=\sigma$	
+\end{itemize}
+
+\end{lemma}
+
+One interesting characterization of the normal distribution is that it is \begin{center}
+the sole distribution whose MLE always coincides with the sample mean\end{center}
+To give a more detailed explanation of this sentence, we start with the following lemma:
+\begin{lemma}
+Let
+\[
+f:\d{R}\times \d{R}\times \d{R}\mor \d{R}:(\mu,\sigma,x)\fun \frac{1}{\sqrt{2\pi}}e^{\frac{-\frac{(x-\mu)}{\sigma}^2}{2}}
+\]	
+Then the MLE associated to the sample $x_1\ldots x_n$ is
+\[
+\hat{\mu}=\sum \frac{x_i}{n}\textrm{ and }\hat{\sigma}=\big(\frac{1}{n}\sum(x_i-\hat{\mu})^2)^\frac{1}{2}
+\]
+\end{lemma}
+\begin{proof}
+This is a straightforward exercise.	
+\end{proof}
+\section{Estimators}
+
+\begin{definition}
+Let $X:(\Omega,\r{A},P)\mor (T,\r{T})$ be a random variable. and $(x_1,\ldots , x_n)$ a sample (set of outcomes) An estimator consists of a daigram
+\begin{displaymath}
+\xymatrix{
+&  \Hom(\Omega,\r{A},P), (T,\r{T}))\ar[dr]_\mu\\
+\Theta\ar[ur]_h & & \d{R}
+}	
+\end{displaymath}
+such that $\Theta\mor \d{R}$ attains a maximum for a certain function $h_\theta$, the estimation
+\end{definition}
+
+
+There are two important classes of estimation:
+
+\subsection{Maximum likelihood estimation}
+ In this case, we suppose given $x_1,\dots x_n$ outcomes of the random variable $X$. Given the map $\Theta \mor \Hom(\Omega,\r{A},P), (T,\r{T}))$, for $h_\theta \in \Theta$, we let \[\mu(h_\theta)=f_{h_\theta^n}(x_1,\ldots x_n)\]
+ This number is the likelihood of $(x_1,\ldots x_n)$ assuming $\theta$
+ 
+ \subsection{Maximum A Posteriori Estimate}
+ We assume that $\Theta,\r{A},P)$ now has the structure of a probability space and let $ d$ given outcomes $x_1,\ldots x_n$ as well as a random variable $\Theta\mor \d{R}$
+\section{on Classifiers}
+
+We start by definining a predictor as follows:
+\begin{definition}
+For a probability space $\Omega$ and a measurable space $\r{O}$. A cost is a function
+\[
+C:\Hom(\Omega,\r{O}) \mor \Hom(\Omega,\d{R})
+\]	
+Let $f\le g \iff \c(f)\le \c(g)$. This defines a pseudo-order. We sat that $f$ is a predictors if its equivalence class $\bar{f}$ is maximal.
+\end{definition}
+
+Usually one builds from the data of a training set, which is a map $\tau: \r{T}\mor \r{O}$ where $\r{T}\subset \Omega$
+
+\section{Naive Bayes}
+
+\begin{definition}
+We say that a Bayesian model $\Theta \times \Sigma$ 	is naive if $P(-\vert \theta)$ is given by a naieve bayes network.
+\end{definition}
+
+
+\section{the Naive Bayes Classifier}
+
+
+In this section, we consider the following classification problem:
+assume we are given a probability space partitioned into a finite set of outcomes (which we call authors here) $O_k\subset \r{O}$. We are given a set of words $D$ and let $\Omega=D^n$ assume given a feature set $\r{F}\subset \Omega\def \Omega$ (these are usually interpreted as bits of text). We now have a function $\tau:\r{F}\mor \r{O}$ which maps each text to its author. By abuse of notation for an author, we let $P(O_k)=P(\tau^{-1}(O_k))$ and for a word $\omega \in \Omega$, we let $P(\omega)\define P(\cup_i\pi^{-1}_i(\omega))$ (where $\pi_k$ projects a text to its $k$-th word)
+Then we define the cost as
+\[
+\Hom(\Omega,\r{O})\mor \Hom(\Omega,\d{R}):f\mor P(f(\omega)\cap \cap_i \pi_i(\omega))
+\]
+
+We say that the problem is naive if the following condition is met for a text $omega \in \Omega$ consisting of words $(\omega_1,\ldots \omega_n)$, we have
+\[
+P(\omega_1\vert \omega_2\ldots \omega_n)=P(\omega_1)
+\] 
+Then the predictor associated to this problem is simply given by
+
+\[
+NB(\omega)= \max_k P(O_k\cap \pi_1(\omega)\cap \ldots \pi_n(\omega))
+\]
+It can be easily checked assuming naivity that
+\[
+NB(\omega)=\max_k \bigg(P(\pi_1(\omega)\vert O_1)\cdot \ldots\cdot P(\pi_n(\omega)\vert O_k)P(O_k)\bigg)
+\]
+
+\begin{example}
+Assume we have a set of emails from John and Sarah (split 50/50). Those emails contain the words brown fox jumps in the following way: for john we have $(0.1,0.3,0.1)$ and Sarah $(0.2,0.5,0.1)$ We wish to know who wrote the word Brown fox. 
+Assume naivity (wish is realistic in this scenario), we have 
+$NB_{John}=0,1\cdot 0.3\cdots 0.5$ whereas $NB_{Sarah} =0.2\cdot 0.5\dots 0.5$. So Sarah wrote it. 	
+\end{example}
+
+\part{Supervised Learners}
+\chapter{the General Theory}
+\section{Defining supervised learners}
+We begin our study of machine learning by suggesting a definition for supervised learners.\\
+Recall that supervised learning (roughly) corresponds to the following paradigm: one is given \emph{data} which consists of \emph{features} and their corresponding \emph{labels}. A supervised learner now assigns to any new feature a new label in a way that matches the given data as well as possible.\\\\
+Let's look at this idea in a little more detail:\\ 
+To begin, we denote the sets of features and labels by $\f{X}$ and $\f{y}$ respectively. We'll also define the \emph{dataspace} $\f{D}$, which consists of a set of possible datasets, each of which is a finite subset of $\f{X}\times \f{y}$ (ie the given features with their assigned labels). Third, we introduce a \emph{hypothesis space} $\f{H}\subset \f{y}^\f{X}$ which contains all the possible ways we'll want to assign a label to a new feature.\\
+A supervised learner now assigns a choice a hypothesis $h_\Delta \in \f{H}$ given a dataset $\Delta \in \f{D}$ in an \emph{optimal} way. In other words, we wish to construct an assignment from the dataspace to the hypothesis space
+\[
+h:\f{D}\mor \f{H}: \Delta\fun h_\Delta
+\]
+such that $h_\Delta$ \emph{fits} the data $\Delta$ optimally.\\ To formalize this optimality condition, we introduce a cost function which assigns a real number given any choice of data and hypothesis:
+\[c: \f{D}\times \f{H}\mor \d{R}: (\Delta,h)\fun c(\Delta,h) \]
+The idea that the choice $h_\Delta$ of hypothesis fits the data best is now translated into $h_\Delta$ minimizing the cost:
+
+\begin{equation} \label{eq:learningcondition}
+	c(\Delta,h_\Delta)=\min_{h\in \f{H}} c(\Delta,h)
+\end{equation}
+
+\noindent Leading us to the following definition:
+
+
+\begin{definition}\label{sl:def:supervisedlearner}
+A supervised learner  $\f{L}$ (or simply learner) is a tuple $(\f{X},\f{y},\f{D},\f{H},c,h)$ where $\f{D}$ consists of finite subsets of $\f{X}\times \f{y}$,  $\f{H}\subset \f{y}^{\f{X}}$  and $h:\f{H}\mor \f{D}$, $c: \f{D}\times \f{H}\mor \d{R}$ are functions satisfying the learning condition
+\[
+	c(\Delta,h_\Delta)=\min_{h\in \f{H}} c(\Delta,h)
+\]
+We say that $\f{L}$ has \emph{learned} the hypothesis $h_\Delta$ from the data $\Delta$.\\
+The functions $c_\Delta\define c(\Delta,-): \f{H}\mor \d{R}$ are the \emph{cost functions} of $\f{L}$
+\end{definition}
+\noindent To make our exposition a little more transparent we'll introduce a bit of notation: 
+
+
+\begin{notation}\label{not:Delta}
+	For any dataset $\Delta \subset \f{X}\times \f{y}$, we define $\Delta_\f{X}\define\big\{(x)_{(x,y)\in \Delta}\big\}$ and define $\Delta_\f{y}$ similarly.\\
+	For a hypothesis $h\in \f{H}$, we let $h(\Delta_\f{X})= \big\{h(x)_{(x,y)\in \Delta}\big\}$
+\end{notation}
+
+In the rest of our discussion, we will encounter a few interesting properties that a learner can possess:\\ 
+\noindent For one, it will be convenient to study learners where the cost function really only depends on the values of the hypothesis on the features of the dataset as follows:
+
+
+\begin{definition}\label{def:regularlearner}
+	A learner $\f{L}$ is \emph{regular} if for any hypotheses $h,k \in \f{H}$ and any dataset $\Delta \in \f{D}$
+	\[
+	h(\Delta_\f{X})= k(\Delta_\f{X})\implies c(\Delta,h)=c(\Delta,k)
+	\]
+\end{definition}
+
+Additionally, it will be convenient to give a specific name to learners where the function $h_\Delta$ is unique:
+\begin{definition}\label{def:sharp}
+We say that a learner is \emph{sharp} if $h_\Delta=\argmin_{h\in \f{H}} c(\Delta,h)$ for any dataset $\Delta \in \f{D}$.\\
+ In particular $h_\Delta$ is fully determined by the cost function $c$
+\end{definition}
+
+
+
+\noindent The first few chapters in this book are dedicated to proving how some of the main learning algorithms that are being used today can indeed be interpreted in the context of Definition \ref{def:supervisedlearner}. Along the way we shall give a clean interpretation of some of these algorithms and build on the theory of learners just described\ldots
+\section{Trainers}
+\subsection{Generalities}
+
+Throughout, we consider a supervised learner $\f{L}$ whose hypothesis space (see \ref{sl:def:supervisedlearner}) $\f{H}$ is a first countable topological space and denote by $\Conv(\f{H})$, the set of convergent sequences in $\f{H}$.\\
+
+\begin{definition}
+Let $\f{L}$ be a learner. A \emph{trainer} consists of a relation
+\[
+\tau \in \f{D}\times \Conv(\f{H})
+\]
+such that $\lim (h_i)_i =h_\Delta$ if $(\Delta,(h_i)_i)\in \tau$
+\end{definition}
+\subsection{An example: Gradient Descent}
+
+\subsection{Boosting}
+
+We begin with a Euclidean learner (ie where $\f{H}$ is a Euclidean space.)
+
+The idea of boosting is to consider a subset $\f{W}\subset \f{H}$ of the hypothesis space and train them to compute the learned hypothesis..
+
+\begin{definition}
+Let $\f{L}$ be a learner and let $\f{W}\subset \f{H}$ be a set of so-called \emph{weak hypotheses}.\\
+A boost for the dataset $\Delta $ consists of a sequence of learners $h_i$ satisfying
+\[
+h_{i+1} \define h_i+\argmin_{w\in \f{W}}\bigg(c(\Delta, h_i+w)\bigg)
+\]
+\end{definition}
+
+\noindent We hope that the following theorem is true
+
+\begin{theorem}
+Let $\f{L}$ be a Euclidean learner and consider $\f{W}\subset \f{H}$.\\ Let $\Delta \in \f{D}$ and let $(h_i)_{i \in \d{N}}$ be a boost for $\Delta$. Then 
+\begin{itemize}
+\item $(h_i)_{i \in \d{N}}$ converges
+\item $\lim h_i = h_\Delta$
+\end{itemize}
+\end{theorem}
+
+
+
+
+
+
+\section{Accuracy}
+Let $\f{y}$ be a set. Recall that $\FRel(\f{y})$ is the set of all finite subsests of $\f{y}\times \f{y}$.
+\begin{definition}
+An accuracy on a set $\f{y}$ is a map of the form
+\[
+\alpha: \FRel(\f{y})\mor \d{R}.
+\]
+\end{definition}
+\begin{definition}
+Given a supervised learner $\r{L}$ and dataset $\Delta \in \f{D}$. We choose a partition $\Delta \define \Delta_{\train}\coprod \Delta_{\test}$ (\emph{a train-test-split}).\\
+For an accuracy $\alpha$ on the target set $\f{y}$, we call the accuracy of $\r{L}$ given the dataset $\Delta$ the number
+\[
+\alpha_\r{L}(\Delta)\define \alpha  \bigg(  \big\{ \big( h_{\Delta_{\train}}  (x),y)  \big) \,\bigg\vert \,(x,y)\in \Delta_{\test} \big\}\bigg).
+\]
+\end{definition}
+
+\noindent More generally, we can define $k$-fold accuracy, by choosing an averaging function:
+\[
+\avg: \d{R}^k\mor \d{R}
+\]
+and performs the same operation $k$ times:
+\begin{definition}
+Given a supervised learner $\r{L}$ and a dataset $\Delta \in \f{D}$, we choose a partition $\Delta = \Delta_1 \coprod \ldots \coprod \Delta_k$.\\
+For an accuracy $\alpha$ on the target set $\f{y}$, we call the accuracy of $\r{L}$ given the dataset $\Delta$ the number
+\[
+\alpha_\r{L}(\Delta)\define \avg\bigg(\alpha\big(\big\{ \big( h_{\Delta\setminus \Delta_i}(x),y)  \big) \,\bigg\vert \,(x,y)\in \Delta_i \big\}\big)\bigg)
+\]
+\end{definition}
+
+
+\subsection{Accuracy of binary classifiers}
+Recall that a binary classifier is a supervised learner where $\f{y}\define \{0,1\}$.\\
+In this setting, there are a few natural choices of accuracies. To efine them, we'll fix a relation $\r{R}\in \FRel(\f{y})$ and define
+\begin{definition}\label{sl:def:binacc}
+We define the following accuracies:
+\begin{itemize}
+\item TP = $\card\big(\big\{(y_{\true},y_{\pred}) \in \r{R}\, \vert\, y_{\true}=y_{\pred} = 1 \big\}\big)$
+ \item TN = $\card\big(\big\{(y_{\true},y_{\pred}) \in \r{R} \, \vert\, y_{\true}=y_{\pred} = 0 \big\}\big)$
+ \item FP = $\card\big(\big\{(y_{\true},y_{\pred}) \in \r{R}\, \vert\, y_{\true}=0,\, y_{\pred} = 1 \big\}\big)$
+ \item TN = $\card\big(\big\{(y_{\true},y_{\pred}) \in \r{R}\, \vert\, y_{\true}=1,\, y_{\pred} = 0 \big\}\big)$
+\end{itemize}
+\end{definition}
+A great way to summarize this information is through precision, recall and the $F_\beta$-score:
+\begin{definition}
+Let $\f{L}$ be a binary classifier.\\
+The recall is given by
+\[
+r=\frac{\text{TP}}{\text{TP}+\text{FN}}
+\]
+(intuitively, how good is the classifier at does detecting positives?).\\
+The precision is given by
+\[
+p= \frac{\text{TP}}{\text{TP}+\text{FP}}
+\]
+(intuitively, how reliable is a positive in the classifier?)
+We combine both by taking the harmonic mean of $r$ and $\beta^2\cdot p$
+\[
+F_\beta = \frac{(1+\beta^2)pr}{\beta^2p+r}
+\]
+\end{definition}
+
+\subsection{Accuracy of trainers}
+
+
+
+
+
+
+
+
+\chapter{Linear learners}
+\section{Generalities}
+
+We begin our study of learners with one of the most ubiquitous learning algorithms: \emph{linear regression}.\\ in this context, we endow the  label space $\f{y}$ with the structure of a finite-dimensional inner product space. $\f{y}$ is thus equipped with a norm in particular. Before we continue our study of linear regression we recall the following standard consructions of inner product spaces:
+
+\begin{lemma}\label{lem:innerproducts}
+Let $V$ and $W$ be inner product spaces with orthonormal bases $\big(v_1,\ldots v_m\big) \in V$ and $\big(w_1,\ldots , w_n\big) \subset W$. Then
+\begin{enumerate}
+\item $V^\ast \define \Hom_\d{R}(V,\d{R})$ is an inner product space with $\bl{f}{g}\define \bl{v}{v'}$ if $\bl{v}{-}=f$ and  $\bl{-}{v'}=g$
+and orthonormal basis given by the maps $\bigg( \bl{v_1}{-}, \ldots, \bl{v_m}{-} \bigg)$
+\item $V\times W$ is an inner product space with $\bl{(v,w)}{(v',w')}\define \bl{v}{w}+\bl{v'}{w'}$ and orthonormal basis $\bigg((v_i,w_j)\bigg)_{i,j}$
+\item $V\tr W$ is an inner product space with $\bl{v\tr w}{v'\tr w}\define \bl{v}{w}\cdot \bl{v'}{w'}$ and orthonormal basis $\bigg((v_i\tr w_j)\bigg)_{i,j}$	
+\item $\Hom(V,W)$ is an inner product space with an orthonormal basis given by maps $e_{i,j}$ defined as
+\begin{equation}
+e_{i,j}(v_k)=
+\begin{cases}
+0, & \text{if}\ k \neq i  \\
+w_j, & \text{otherwise}
+\end{cases}
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+
+\begin{proof}
+Items (1) through (3) consist of routine calculations. To show item (4), recall that the function
+\[
+\iota: V^*\tr W \mor \Hom_{\d{R}}(V,W)
+\]
+which assigns to $f\tr w$ the linear map $\iota_{f\tr w}(v)\define f(v)\cdot w$ is an isomorphism. Now, items $(1)$ and $(3)$ together imply that $V^*\tr W$ is indeed an inner product space with  orthonormal basis $\big\{\bl{v_i}{-}\tr w_j\big\}_{i,j}$. Now simply note that the map associated to $\bl{v_i}{-}\tr w_j$ under the function $\iota$ is exactly $e_{i,j}$
+\end{proof}	
+	
+Returning to our discussion above, we consider a finite-dimensional inner product space $\f{y}$ of labels and $\f{X}$ any set of features. Now, for any finite dataset $\Delta\subset \f{X}\times \f{y}$, the space $\f{y}^\Delta$ in turn carries an inner product by Lemma \ref{lem:innerproducts}, so that for any map $f \in \f{y}^\f{X}$, we can define a cost as follows:
+\[
+c(\Delta,f)=\vert \vert y-f(x)\vert\vert_{\f{y}^\Delta}\define\sqrt{\sum_{\Delta} \vert \vert y-f(x)\vert \vert^2}
+\]
+
+The main result of this chapter will be to show that this cost indeed describes a learner under the right conditions. To this end, we will make the following definition:
+\begin{definition}
+Let $\f{H}\subset \f{y}^\f{X}$ and $\Delta \subset \f{X}\times \f{y}$. Then we say that $\Delta$ separates $\f{H}$ if for any $f,g \in \f{H}$:
+\[
+f\arrowvert_{\Delta_{\f{X}}}=g\arrowvert_{{\Delta}_\f{X}}\implies f=g
+\]
+\end{definition}
+The main result of this chapter is: 
+\begin{theorem}\label{thm:linearlearner}
+Let $\f{y}$ be a finite-dimensional inner product space, $\f{X}$ any set and let $\f{H}\subset \f{y}^\f{X}$ be a finite-dimensional subspace of $\f{y}^\f{X}$.  Assume that  any $\Delta \in \f{D}$ separates $\f{H}$ and let $c(\Delta,f)= \vert\vert y-f(x)\vert \vert_{\f{y}^\Delta}$. Then $(\f{X},\f{y},\f{D},\f{H},c)$ defines a sharp learner (as in Definition \ref{def:sharp})
+\end{theorem}
+
+
+\begin{definition}
+We say that a learner is linear if it is of the above form
+\end{definition}
+
+One particular type of linear learner will be of particular interest, as it allows us to be a little more explicit with certain constructions: if we assume that $\f{X}$ itself carries the structure of a finite-dimensional inner product space, and put $\f{H}\define \Hom_{\d{R}}(\f{X},\f{y})$ as well as consider finite datasets $\Delta \subset \f{X}\times \f{y}$ such that $\Delta_{\f{X}}$ spans the whole of $\f{X}$
+(where we recall our use of the notation \ref{not:Delta}), then it's easy to see that the conditions of Theorem \ref{thm:linearlearner} are satisfied so that we indeed obtain an example of a linear learner:
+
+
+\begin{definition}\label{def:euclideanlearner}
+A \emph{Euclidean learner} is a sharp (linear) learner where $\f{X},\f{y}$ are finite-dimensional inner product spaces, \[
+\f{D} = \bigg\{ \Delta \subset \f{X}\times \f{y}\,\,\bigg\vert\,  \vert \Delta \vert \neq \infty , \textrm{ and span}(\Delta_{\f{X}}) = \f{X}\bigg\}
+\text{,}\,\,\, \f{H}=\Hom_\d{R}(\f{X},\f{y})
+\]
+and 
+\[
+c:\f{D}\times \f{H}\mor \d{R}:(\Delta,f)\fun \vert \vert \big( y-f(x)\big)_{(x,y)\in \Delta} \vert \vert_{\f{y}^\Delta} 
+\]
+\end{definition}
+
+\chapter{Statistical leaners}
+\chapter{Bayesian learners}
+\chapter{$k$-Nearest Neighbors}
+We begin by picking a parameter $k \in \d{N}$.\\
+Let $\f{X}$ be a metric space and $\f{y}$ a finite set.  Let $\f{D}$ be the dataspace consisting of finite subsets $\Delta \subset \f{X}\times \f{y}$ such that each $\Delta$ is a function.  \\
+For $x \in \Delta$ Let us define  $\kNN(x)$ ( the set of \emph{k-nearest neighbors}) as the set of $k$ points in $\Delta\in \f{D}$ who are closest to $x$ in the metric space $\f{X}$.\\
+We now consider the hypothesis space $\f{H} = \f{y}^\f{X}$ and look at the following cost function 
+\[
+c: \f{D}\times \f{H}\mor \d{R}: (\Delta,f)\mor  \sum_{(x,y) \in \Delta} \vert k-\textrm{nearest neighbors of }x \textrm{ in class } y\vert 
+\]
+We now define for $\Delta \in \f{D}$ the learned hypothesis $h_\Delta \in \f{H}$ to be
+\[
+h_\Delta(x) = \argmax_{y \in \f{y}}  \vert k-\textrm{nearest neighbors of }x \textrm{ in class } y\vert \]
+Then we trivially have:
+
+\begin{theorem}
+The above defines a supervised learner, called $k$-nearest neighbors.
+\end{theorem}
+\chapter{Support Vector Machines}
+
+\section{the Linearly Separable Case}
+
+
+Let $V$ be a normed space and $f:V \mor \{-1,1\}$ a function. 
+\begin{definition}
+A support vector machine is a hyperplane $H \subset V$ which maximizes the tuple
+\[
+(d(H,f^{1}(-1),d(H,f^{-1}(1)))
+\]	
+\end{definition}
+
+\begin{convention}
+	We will always denote $f^{-1}(1)$ (resp. $f^{-1}(-1)$) by $V_1$ (resp. $V_{-1}$).
+\end{convention}
+
+
+
+
+
+\begin{theorem}
+Assume that $V_{-1}, V_1	$ are linearly separable. Then there exists a unique support vector machine
+\end{theorem}
+
+
+
+\begin{lemma}
+Let $H_1=a+V, H_2=b+V$ parallell hyperplanes. and $o \in V^{\perp}$
+\[
+d(H_1,H_2)=\frac{\vert \bl{o}{b-a}\vert}{\vert\vert o\vert \vert}
+\] 	
+\end{lemma}
+
+\begin{proof}
+Since $-b$ is an isometry, we can assume $b=0$. Now, for a vector $x\in a+V$, we have that $d(a+v,V)$	 is the distance to the orthogonal projection of $x$ on $V$. Since by definition, we have $x=\pi_V(x)+\pi_{V^\perp}(x)$, $d(x,V)=\vert \vert \pi_{V^{\perp}}(x)\vert\vert=\pi_{o}(x)$.\\
+Now the projection of $x$ onto the line with direction $o$ is
+\[
+\frac{\vert \bl{o}{x}\vert}{\vert \vert o\vert \vert}=\frac{\vert \bl{o}{a}\vert}{\vert \vert o\vert \vert}\]
+hence, the claim
+\end{proof}
+
+
+\begin{definition}
+A linear separator is an affine function $V\mor \d{R}$ such that $f\cdot \sigma \ge 1$
+\end{definition}
+
+Since $\sigma$ is affine, the fibers $\sigma^{-1}(1)$ and $\sigma^{1}(-1)$ are parallel hyperplanes. This leads to the following definition
+
+\begin{definition}
+A support vector machine is a linear separator $\sigma$ which maximizes
+\[
+d(\sigma^{-1}(1),\sigma^{-1}(-1))
+\]	
+\end{definition}
+
+\begin{theorem}
+A support vector machine is equivalent to the data of a couple of vectors $(a,w)$such that $\bl{w}{x_i+a}\ge 1$ and $\vert \vert w\vert \vert$ is minimal	for this condition.
+\end{theorem}
+
+\begin{proof}
+Since $\sigma$ is affine, the kernel is a hyperplane $a+V$. let $w in V^{\perp}$. Then	
+\end{proof}
+
+\chapter{Neural Networks}
+We let $X$ be a topological space
+\begin{definition}
+A perceptron is a quiver with a marked node, $n$ ingoing	 vertices and 1 outgoing vertex, together with a continous function $Hom^{n}(X,X)$
+\end{definition}
+
+\chapter{Errors in Classifiers}
+
+
+\section{Bias}
+
+Intuitively, bias occurs when the model isn't complex enough to fit the data
+
+
+
+
+\section{Learning Curves}
+Recall that a learning scheme consists of spaces $X$ and $Y$ together with subspaces $H\subset Hom(X,Y)$, $D\subset X\times Y$ and a decomposition $D=D_{\Train}\cup D_{\Test}$.\\
+Assume we have an error function $E:\r{H}\times \r{P}(X)\mor \d{R})$. Assume that $X_{\Train}$ and $X_{\Test}$ are parametrized by some functions $\theta_{\Train}$ and $\theta_{\Test}$. Then we define the learning curves as
+
+\[
+LC_{\Train}:\d{R}\mor \d{R}: x\fun E(h,\theta_{\Train}^{-1}(]-\infty,x]))
+\]
+\[
+LC_{\Train}:\d{R}\mor \d{R}: x\fun E(h,\theta_{\Test}^{-1}(]-\infty,x]))\]
+
+
+
+
+
+
+\chapter{Machine Learning}
+
+\section{Basic Definition}
+
+\begin{definition}
+We consider $\f{X}$ and $\f{y}$, the set of \emph{features} and \emph{labels}. Additionally, we define $\f{D}\subset \Rel(\f{X},\f{y})$, the \emph{dataspace}. and $\f{H}\subset \Hom (\f{X},\f{y})$ the hypothesis space.\\ A regressor is a function
+\[
+\rho: \f{D}\mor \f{H}
+\]
+called the \emph{regressor} (or \emph{classifier}) if $\f{y}$ is finite)
+together with a \emph{cost function }
+\[
+\eta: \Rel(\f{y})\mor \d{R}^+
+\]
+such that for each $\Delta \in \f{D}$:
+\[
+\min_{f\in \f{H}} \eta(\Delta_f)=\rho_\Delta
+\]
+where $\Delta_f \define\{(f(x),y)\vert (x,y) \in \Delta \}$
+\end{definition}
+
+\begin{example}
+Assume that $\f{X}=V$ is a real inner product space and $\f{y}=\d{R}$. and let $\f{D}=\f{H}=V^*$
+For a relation $\r{R} \in \Rel(\f{y}))$, we define
+\[
+\eta(\r{R})=\sqrt{\sum_{(a,b) \in r{R}}\vert\vert a-b\vert \vert ^2}
+\]
+The associated $\rho$ which exists and is unique is the linear regressor.
+\end{example}
+
+\subsection{MLE Regressors}
+
+Assume that $\f{y}=\d{R}$ and that $\f{H}\subset \Hom(\f{X},\d{R})$ has the structure of a Markov kernel
+\[
+\f{H}\stackrel{P}{\Longrightarrow} \d{R}
+\]
+which satisfies the MLE hypothesis.
+\begin{definition}
+We will fix a set $\f{D}\define \f{X}\times \f{y}$ called the dataspace consisting of \emph{the example space} and \emph{feature space}. We let $F(\r{D})$ denote the set of functions $X \mor \f{y}$ where $X\subset \r{X}$ is a finite subset.\\
+A learning scheme is a function
+\[
+F(\r{D})\times \f{X}\mor \f{y}
+\]
+Called the \emph{regressor}, 
+If $\f{y}$ is finite, we call it a classifier, otherwise we call it a regressor.
+\end{definition}
+
+
+\begin{example}
+Assume $\f{X}$ is a (real) inner product space. Then the linear regressor is defined by sending $(D,x)$ to $f(x)$ where
+\[
+\argmin_{f\in \f{X}^*} \vert \vert y-x \vert \vert 
+\]	
+Here the norm is taken in $\f{X}^{\ds \vert D\vert }$ and $(x,y)\in D$. We will call this a linear regressor.
+\end{example}
+
+There is another interpretation of the above regressor:
+
+\begin{example}
+WE let $\f{X}$ be a real inner space and $\f{y}=\d{R}$. For each $n$, We define a statistical model
+\[
+(\f{X}^*,\r{B}^*)\implies (\f{D},\r{B})
+\]
+by defining for $\alpha \in \f{X}^*$ and
+\[
+f_{\alpha}((x,y))= e^{\bigg(\frac{y-\alpha(x)}{\sigma}\bigg)^2}
+\] 
+This induces a canonical statistical model  $(\f{X}^*,\r{B}^*)\implies (\f{D}^n,\r{B})$ 
+For a fixed $D \subset \f{D}^n$, we let $\alpha$ be the associated maximum likelihood estimator. Then $\alpha$ coincides with the linear regressor.
+\end{example}
+
+
+\begin{example}
+Let $\f{D}=(\f{X},\f{y})$. A decision tree for $\r{D}$ is a graph such that
+
+\begin{itemize}
+\item The graph is dichotomic
+\item the nodes are function $\f{X}\mor \Z_2$ (called attributes
+\item There is a bijection between the final nodes and $\f{y}$	
+\end{itemize}
+If $\d{T}$ is a decision tree, we associate a function $\lambda_\d{T}: \f{X}\mor \f{y}$ by sending $x$ to the final node. The scheme $\ID3$ associates a decision tree to any $F(\f{D}$ yielding a learning scheme:
+\[
+F(\f{D})\times \f{X}\mor \f{y}: (D,x)\fun \lambda_{\ID3(D)}(x) 
+\]
+\end{example}
+
+
+\begin{example}
+We again assume that $\f{X}$ is an inner product space and $\f{Y}=\{-1,1\}$. We say that $f \in F(f{D})$ can be separated if there exists an affine function $f \in \Aff(\f{X}, \d{R})$ $f\cdot \sigma \ge 1$. If $f$ cannot be separated, we let $\SVM(f,x)=0$, If $f$ can be separated, we consider $SVM_f\define\argmin_{\sigma \in \sep(f)} d(\sigma^{-1}(1),\sigma^{-1}(1))$ and let 
+\[
+\SVM:F(\f{D})\times \r{X}\mor \f{y}:(f,x)\mor \SVM_f(x)
+\]
+This is the hard margin Support vector machine.
+\end{example}
+
+
+\begin{example}
+Assume we have a Bayesian model on $\Pi$ on $\f{y}\times \f{X}$	
+\end{example}
+
+
+\section{Classification}
+
+In machine learning, start with a space of \emph{instances} and try and find function called the \emph{candidate concept} which maps to a finite space. The image space being the target concepts. The concept comes from a class of functions, called the hypothesis class.
+Part of the data includes 2 subset of the instances $\times$ targets, the sample (or training set)  and testing set.\\
+\section{Decision Trees}
+
+Recall:
+
+\begin{definition}
+A  tree	is a graph where two nodes are connected by exactly one path. Equivalently, a tree is an acyclic connected graph.\\
+\end{definition}
+
+\begin{definition}
+A decision tree is a tree with a start node wich has two edges. A subset of end nodes wich have one edge whereas all other nodes have 3.	
+\end{definition}
+
+We can construct a partition on decision trees as follows:
+
+\begin{itemize}
+\item the start node is equivalent to itself call this level $0$
+\item 	two nodes are in level $i$ if there is a common node in level $i-1$ connecting them.
+\end{itemize}
+
+\begin{lemma}
+Being in the same level is an equivalence relation	
+\end{lemma}
+
+
+\begin{definition}
+A truth coloring is a binary coloring on a decision tree such that for each node $n$ at level $i$, the two edges out of $n$ to level $i+1$ are colored true and false
+\end{definition}
+\begin{lemma}
+A truth coloring exists	
+\end{lemma}
+
+There's another way of thinking about decision trees. Recall that
+
+\begin{definition}
+A logical statement in $n$ variables is simply a map $\Z_2^n\mor \Z_2$	
+\end{definition}
+
+\begin{theorem}
+There is a 1 to 1 correspondence between logical statements in $n$ variables and decision trees on $n-1$ levels with truth function 
+\end{theorem}
+
+\begin{remark}
+note that the amount of nodes coming from a logcial expression can be rather large as it equals  ${2}^{2^n}$	$(\vert \Hom (\Z_2^n,\Z_2)\vert)$	
+\end{remark}
+
+This leads to the ID3 algorithm for machine learning:
+
+\begin{itemize}
+\item pick a "best attribute" $A$
+\item assign $A$ as a decision attribute (logical atom) for a node
+\item for each value of $A$ creat a descendant
+\item sort the training axamples to the leaves
+\item if examples perfectly classified, then $STOP$
+\item else, iterate over each leaf.	
+\end{itemize}
+
+
+What do we mean by best attribute?
+
+\begin{definition}
+The information gain over $S$ and $A$ is given by
+\[
+\Entropy(S)-\sum_v \frac{\vert S_v\vert }{\vert S\vert }\Entropy(S_v)
+\]	
+
+\end{definition}
+
+It's not clear whether this algorithm will indeed stop, in fact it doesnt necessary. So we assume that some data points are 'noisy' and look for the best hypothesis. by avoiding overfitting (which intuitively leads to a tree which is too big, i.e. there are smaller trees which yield the same classification). This is done by 'pruning' back the tree.
+
+\subsection{Bias}
+Bias has two aspects:
+\begin{itemize}
+\item restriction bias, i.e. the hypothesis set (in this cas the collection of decision trees)
+\item the preference bias: the hypothesis form the hypothesis set we prefer.	
+\end{itemize}
+
+ID3 prefers:
+\begin{itemize}
+\item good splits at the top of tree
+\item correct over incorrect trees
+\item shorter trees	
+\end{itemize}
+
+
+\part{Unsupervised Learners}
+
+\chapter{Generalities}
+
+
+\section{the Definition}
+
+\begin{definition}
+A cluster set consists of a surjective map $\pi:\f{U}\mor \r{B}$ of sets, (sometimes together with a basepoint $p\in \r{B}$). The fibers $\pi^{-1}(b)$ will be denoted $\f{U}^b$.
+\end{definition}
+
+\begin{definition}
+An unsupervised learner consists of a set of features $\f{X}$ and labels $\f{y}$, a clusterset $\f{U}\mor \r{B}$, dataspace $\f{D}\subset \coprod \f{X}^i$ and hypothesis space $\f{H}\subset \f{y}^\f{X}$ together with maps
+\[
+l:\f{X}\times \f{U}\mor \f{y},\,  m:\r{B}\times \f{D}\mor \f{U}, \textrm{ and } c:\f{D}\times \f{U}\mor \d{R}
+\] 
+called the labeling -, cost -, and method maps. 
+\footnote{\noindent we say that the feature obtains a label through the cluster by $l$, each dataset associates a $b$-cluster through the method $m$ and this comes with a cost $c$} 
+We further assume the method $m$ is minimal in the sense that for each dataset $\Delta \in \f{D}$ and $b \in \r{B}$, we have
+\[
+\min_{\f{U}^b} c\big(\Delta, -\big)=c\big(\Delta,m(b, \Delta)\big)
+\]
+We can then define the \emph{learned hypothesis} (which intuitively labels each feature optimally) as
+\[
+\r{B}\times \f{D}\mor \f{H}: (b,\Delta)\mor h_{b,\Delta}
+\textrm{ where } h_{b,\Delta}\big(x\big)\define l\big(x,m(b,\Delta)\big)
+\]
+We finally require that $h_\Delta \in \f{H}$
+\end{definition}
+
+\chapter{$k$-Means}
+
+\chapter{Tree Clustering}
+
+\part{Preprocessing}
+
+\chapter{Change of Basis }
+
+\section{PCA}
+
+\subsection{Tuning the Parameter}
+
+
+\addcontentsline{toc}{section}{References}
+
+\bibliographystyle{alpha}
+\bibliography{Custom_Preprint_bibliography}
+\end{document}
