@@ -446,7 +446,7 @@ To this end, let $\big\{v_1,\ldots ,v_n \big\}$ be an orthonormal basis for $V$ 
 One major aspect of machine learning is the study of \emph{supervised learners}. \\
 For these algorithms one is given a space of \emph{features} $\f{X}$ together with a space of \emph{labels} $\f{y}$ -the underlying idea being that to each feature $x \in \f{X}$, one can attach its correct label $y \in \f{y}$.\\ 
 In order to do this, One first considers a \emph{hypothesis space} $\f{H}$ of functions $\f{X}\mor \f{y}$ which consist of all the ways one wishes to make a prediction, and collects a \emph{dataset} $\Delta \in \f{X}\times \f{y}$.\\
- Using this dataset , one in turn defines a cost function $c: \f{H}\mor \d{R}$ which intuitively describes how accurate any chosen hypothesis $h \in \f{H}$ is. The appropriate $h$ hypothesis will then be the one that minimizes this cost function.\\\\
+Using this dataset , one in turn defines a cost function $c: \f{H}\mor \d{R}$ which intuitively describes how accurate any chosen hypothesis $h \in \f{H}$ is. The appropriate $h$ hypothesis will then be the one that minimizes this cost function.\\\\
 As such the problem of finding minima for functions plays a key role in the field of machine learning.\\
 Arguably, the most popular approach to this problem is to construct a sequence of hypotheses $x_i \in \f{H}$ which decreases the cost function $c$ at each step and hopefully converges to this global minimum. One particularly elegant way of constructing such a sequence is the method of gradient descent.\\
 In this chapter, we investigate this method and prove that it is indeed descending and converging to a global minimum under certain circumstances. Along the way, we give a bound for the error at each iteration.
@@ -823,24 +823,18 @@ f(x_{n})-f^\mu\le \frac{\norm{x_0-x^*}^2}{2\lambda k}
 
 \chapter{Probability theory}
 \section{Overview}
-\begin{definition}\label{def:prob_probspace}
-
-\end{definition}
-
-
 \section{Sampling}
 \begin{convention}\label{conv:prob_univ}
-We will fix a probability space $(\textrm{U}, \r{U},P)$ and throughout any random variable will always have this as its domain
+We will fix a probability space $(\textrm{U}, \r{U},\mu)$ and throughout any random variable will always have this as its domain
 \end{convention}
 
 \begin{definition}\label{def:sampling}
-Let $(\Omega,\r{F})$ be a measure space.\\
-Assume an underlying probability space with measure $P$( following conv \ref{conv:prob_univ}).\\
+Let $(\Omega, \r{F})$ be a measurable space.\\
 The \emph{sample space} of $\Omega$ is the set 
 \[
 S\Omega\define \coprod_{i \in \d{N}}\Omega^i
 \]
-Together with the canonical $\sigma-$algebra.\\
+endowed with the canonical $\sigma$-algebra $\coprod \r{F}$.\\
 The space of random samples is
 \[
 RS\Omega\define  \coprod_{i \in \d{N}} \bigg\{(X_1,\ldots X_n)\vert \, X_i \textrm{ i.i.d }\sim P\bigg\}
