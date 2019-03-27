@@ -7,7 +7,7 @@
 
 
 \theoremstyle{plain}
-\newtheorem{corollary}{Corollary}[subsection]
+\newtheorem{corollary}{Corollary}[section]
 \newtheorem{convention}[corollary]{Convention}
 \newtheorem{example}[corollary]{Example}
 \newtheorem*{theorem*}{theorem}
@@ -70,6 +70,7 @@
 \let\div\relax %unassign \div
 \DeclareMathOperator{\div}{div}
 \DeclareMathOperator{\divu}{div}
+\newcommand{\draw}[1]{\widetilde{\textrm{S}} #1}
 \newcommand{\ds}{\oplus}
 \newcommand{\DS}{\bigoplus}
 \newcommand{\epi}{\xymatrix{{}\ar@{->>}[r]&{}}}
@@ -137,8 +138,8 @@
 \DeclareMathOperator{\rk}{rk}
 \DeclareMathOperator{\rrk}{r.rk}
 \def\locExt{\mathscr{E}\mathit{xt}}
+\newcommand{\sample}[1]{\textrm{S} #1}
 \DeclareMathOperator{\SL}{SL}
-\DeclareMathOperator{\Sample}{S}
 \DeclareMathOperator{\RS}{RS}
 \DeclareMathOperator{\SPS}{SPS}
 \DeclareMathOperator{\sing}{sing}
@@ -219,7 +220,106 @@
 \part{Mathematical background}
 
 \chapter{Linear algebra}
+\section{the Normal equation}
 
+
+\noindent In this section, we'll refresh the reader on projections onto images of linear maps: The starting point of this construction is the following lemma:
+\begin{lemma}\label{lem:mindist-perp}
+	Let $W\subset V$ be a subspace of the inner product space $V$. Let $v \in V$ and $u \in W$.\\
+	Then the  following are equivalent:
+	\begin{enumerate}
+		\item $(v-u) \perp W$
+		\item $	\argmin_{w \in W}\norm{v-w} =u$	
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Let $w \in W$.\\
+	Assuming $u \in W$ satisfies the first condition, we have $v-u \perp u-w$ and by the Pythagorean theorem, we have:
+	\[
+	\norm{v-w}^2 = \norm{v-u}^2+\norm{u-w}^2 \ge \norm{v-u}^2
+	\]
+	Proving the second condition.\\ 
+	Conversely, we assume $u\in W$ satisfies the second condition and apply the following trick:\\
+	Consider the function:
+	\[
+	\phi:\d{R}\mor \d{R}: t \fun \norm{v-u+tw}^2
+	\]	
+	Since $\norm{v-u}^2$ is minimal, $\phi$ has a minimum at $t=0$. Moreover, $\phi$ is differentiable so that $\phi'(0)=0$. It's also easy to see that
+	\[
+	\phi(t) = \norm{v-u}^2 +2\cdot t \bl{v-u}{w}+t^2\norm{w}^2
+	\]
+	Hence $0=\phi'(0) = 2 \bl{v-u}{w}$, and $v-u\perp w$ as required
+\end{proof}
+
+\begin{lemma}\label{lem:projection}
+	Let $W \subset V$ be a  subspace of a finite-dimensional inner product space. Then the map
+	\[
+	\pi: V\mor W: v \fun \argmin_{w \in W} \norm{v- w}
+	\]
+	is well defined
+\end{lemma}
+
+\begin{proof}
+	By the above lemma we need to show that for any $v \in V$, there exists a unique $\pi(v) \in W$ such that $v-\pi(v) \perp W$. To this end, we look at the following map $ f \in W^*$
+	\[
+	f: W \mor \d{R}: w \fun \bl{v}{w}
+	\]
+	Since $W^*$ is in turn an inner product space, $f$ can be written in the form $\bl{\pi(v)}{-}$ for some unique $\pi(v) \in W$. The result now follows
+\end{proof}
+
+The lemma above motivates the following definition:
+
+\begin{definition}\label{def:projection}
+	Let $W\subset V$ be a subspace of a finite dimensional inner product space. Then the unique map $\pi: V\mor W$ defined by 
+	\[
+	\pi(v) \define \argmin_{w \in W}\norm{v-w}
+	\]
+	is \emph{the projection of $V$ onto $W$}
+\end{definition}
+\begin{corollary}\label{lem:projcoincide}
+	Let $W=\im(f)\ds \im(f)^{\perp}$ and $\pi_{\im(f)}:W\mor \im(f)$ be the canonical projection. Then $\pi_{\im(f)}$ coincides with the projection onto the subspace $\im(f)\subset W$ in the sense of Definition \ref{def:projection}
+\end{corollary}
+
+\begin{proof}
+This follows immediately from \ref{lem:mindist-perp}
+\end{proof}
+\noindent Next, we consider a linear map $f \in \Hom_\k(U,V)$ and let $W$ be the subspace $\im(f)$. One can give a more explicit description of the projection $\pi: V\mor W$:
+
+\begin{lemma}\label{lem:normaleq}
+	Let $f \in \Hom(U,V)$ and and $v \in V$ Then the following are equivalent:
+	\begin{enumerate}
+		\item	$f(u)$ is the projection of $v$ onto the subspace $\im(f)\subset V$
+		\item The vector $u \in U$ satisfies $(f^* \circ f)(u) = f^*(v)$	
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	$f(u)$ is the projection of $v$ onto $\im(f)$ if and only if $\bl{v-f(u)}{f(u')}$ for any $u' \in U$ by Lemma \ref{lem:mindist-perp}. Now,
+	\[
+	\bl{v-f(u)}{f(u')}=\bl{f^*(v)-f^*f(u)}{u'}
+	\]
+	This last expression is $0$ if and only if $f^*(v)-f^*f(u)=0$ since the inner product is nondegenerate
+\end{proof}
+
+The above lemma justifies the following definition:
+
+\begin{definition}
+	Let $f \in \Hom(V,W)$ and $w \in W$.\\ 
+	We say that $v \in V$ satisfies the normal equation if and only if 
+	\[
+	(f^* \circ f)(v) = f^* w
+	\]
+\end{definition}
+In this terminology, we can restate lemma \ref{lem:normaleq} as follows:
+\begin{lemma}
+	Let $f \in \Hom(V,W)$ and $w \in W$ Then the following are equivalent:
+	\begin{enumerate}
+		\item $w =\argmin_{u \in V}\vert \vert w-f(u)\vert \vert$
+		\item $v$ is a solution to the normal equation $(f^* \circ f)(v) = f^* w$
+	\end{enumerate}
+\end{lemma}
+\noindent It is finding the solutions to this equation that we are interested in. It turns out that one can give an explicit description of them using the so-called \emph{Moore-Penrose pseudo-inverse}. Since this construction seems to be a little less well covered in standard linear algebra literature, we'll discuss in detail below: 
 \section{the (Moore-Penrose) Pseudo-inverse}
 
 In this section, we will let $V, W$ be finite-dimensional vector spaces and $f \in \Hom_\d{R}(V,W)$.\\ It is well-known that $f$ does not have an inverse in general. There is however a natural generalization of the notion of inverse which can be defined for \emph{any} map: a \emph{pseudo-inverse}. More precisely, if $f$ either has  a nonzero kernel or if the image of $f$ is not the whole of $W$, then the inverse of $f$ will not exist. One natural way to remediate this issue is to consider complements for both subspaces and write 
@@ -450,7 +550,6 @@ Using this dataset , one in turn defines a cost function $c: \f{H}\mor \d{R}$ wh
 As such the problem of finding minima for functions plays a key role in the field of machine learning.\\
 Arguably, the most popular approach to this problem is to construct a sequence of hypotheses $x_i \in \f{H}$ which decreases the cost function $c$ at each step and hopefully converges to this global minimum. One particularly elegant way of constructing such a sequence is the method of gradient descent.\\
 In this chapter, we investigate this method and prove that it is indeed descending and converging to a global minimum under certain circumstances. Along the way, we give a bound for the error at each iteration.
-\newpage
 \section{Background and Notation}
 In this context, the hypothesis space $\f{H}$ will be a Hilbert space, i.e. a real vector space $V$, together with an inner product $\bl{-}{-}$ such that the associated norm $\norm{x}\define \sqrt{\bl{x}{x}}$  is complete. For the reader not comfortable with the language of Hilbert spaces,  we assure him it is safe to assume that $V$ is finite-dimensional, in which case the Gram-Schmidt algorithm exhibits an orthonormal basis, and shows in particular that  $V$ is isomorphic to $\d{R}^n$, together with the usual inner product $\bl{x_1,\ldots , x_n}{y_1,\ldots y_n}\define \sum_i x_iy_i$.\\
 
@@ -559,11 +658,11 @@ We now  go on to prove an important inequality in a certain setting, which in so
 \begin{lemma}
 Assume $f$ is convex and differentiable everywhere. Moreover, assume the gradient satisfies the Lipschitz condition:
 \[
-\vert  \nabla f(y)-\nabla f(x) \vert \le K\cdot \vert \vert y-x\vert \vert 
+\vert  \nabla f(y)-\nabla f(x) \vert \le K\cdot \norm{y-x}
 \]	
 Then for any $x,y \in V$, we have
 \[
-f(x)+\nabla f(x)(y-x) \le f(y)\le f(x)+\bl{\nabla f(x)}{y-x} + K \cdot \vert \vert y-x\vert \vert ^2
+f(x)+\bl{\nabla f(x)}{(y-x)} \le f(y)\le f(x)+\bl{\nabla f(x)}{y-x} + K \cdot \norm{y-x}^2
 \]
 \end{lemma}
 
@@ -822,26 +921,31 @@ f(x_{n})-f^\mu\le \frac{\norm{x_0-x^*}^2}{2\lambda k}
 
 
 \chapter{Probability theory}
-\section{Overview}
-\section{Sampling}
+\section{the General theory}
 \begin{convention}\label{conv:prob_univ}
-We will fix a probability space $(\textrm{U}, \r{U},\mu)$ and throughout any random variable will always have this as its domain
+We will fix a probability space $(\textrm{U}, \r{U},\lambda)$ and throughout any random variable $X$ on $(\Omega,\r{F})$ will always have this as its domain.
 \end{convention}
+\subsection{Sampling}
 
-\begin{definition}\label{def:sampling}
+
+\begin{definition}\label{mb:prob:def:sampling}
 Let $(\Omega, \r{F})$ be a measurable space.\\
 The \emph{sample space} of $\Omega$ is the set 
 \[
-S\Omega\define \coprod_{i \in \d{N}}\Omega^i
+\sample{\Omega}\define \coprod_{i \in \d{N}}\Omega^i
 \]
-endowed with the canonical $\sigma$-algebra $\coprod \r{F}$.\\
-The space of random samples is
+endowed with the canonical $\sigma$-algebra $\coprod_{i \in \d{N}} \r{F}$.\\
+The \emph{drawing space} is the subspace
 \[
-RS\Omega\define  \coprod_{i \in \d{N}} \bigg\{(X_1,\ldots X_n)\vert \, X_i \textrm{ i.i.d }\sim P\bigg\}
+\draw{\Omega} = \big\{ (w_1,\ldots w_n) \in \sample{\Omega} \vert \, \omega_i\neq \omega_j \big\}
+\]
+The space of random samples is defined as:
+\[
+RS\Omega\define  \coprod_{i \in \d{N}} \bigg\{(X_1,\ldots X_n)\vert \, X_i \textrm{ i.i.d }\}
 \] 
 We say that $(x_1\ldots x_n)$ is sampled from $P$ if it lies in the image of the canonical map
 \[
-\ev: \Omega\times RS\Omega\mor S\Omega: \bigg(\omega, \big(X_1,\ldots X_n\big)\bigg)\fun \bigg(X_1(\omega),\ldots X_n(\omega)\bigg)
+\ev: U\times RS\Omega\mor S\Omega: \bigg(\omega, \big(X_1,\ldots X_n\big)\bigg)\fun \bigg(X_1(\omega),\ldots X_n(\omega)\bigg)
 \]
 \end{definition}
 
@@ -870,7 +974,7 @@ If each probability measure $\Sigma(\theta,-)$ is dominated by the measure $\lam
 \end{definition}
 
 \begin{example}
-Let $(\Omega, \r{F})$ be a measurable space and consider the  space  of samples (def. \ref{def:sampling}) given by $S\Omega\define \coprod_{in \in\d{N}}\Omega^i$.\\
+Let $(\Omega, \r{F})$ be a measurable space and consider the  space  of samples (def. \ref{mb:prob:def:sampling}) given by $S\Omega\define \coprod_{in \in\d{N}}\Omega^i$.\\
 Then we can define a statistical model $\Sigma: S\Omega \implies \Omega$ through
 \[
 \sigma\big((x_1,\ldots, x_n), A\big)=\frac{1}{n}\sum \card\big\{1_{A}(x_i)\big\}
@@ -1274,7 +1378,7 @@ Assume naivity (wish is realistic in this scenario), we have
 $NB_{John}=0,1\cdot 0.3\cdots 0.5$ whereas $NB_{Sarah} =0.2\cdot 0.5\dots 0.5$. So Sarah wrote it. 	
 \end{example}
 
-\part{Supervised Learners}
+%\part{Supervised Learners}
 \chapter{the General Theory}
 \section{Defining supervised learners}
 We begin our study of machine learning by suggesting a definition for supervised learners.\\
@@ -1852,13 +1956,27 @@ We finally require that $h_\Delta \in \f{H}$
 
 \part{Preprocessing}
 
-\chapter{Change of Basis }
+\chapter{Change of Basis}
 
 \section{PCA}
 
 \subsection{Tuning the Parameter}
 
 
+\chapter{Relational databases}
+
+\begin{definition}
+A relational database for  a set $\Delta$ consists of a sequence of sets $(\f{F}_k)_{k \in K}$ together with a set $\{K_1,\ldots K_n\}$ where $K_i \in \draw{K}$ (following Definition \ref{mb:prob:def:sampling}) and maps
+\[
+\delta_i: \Delta \mor (\frak{X})_{k \in K_i}
+\]
+satisfying the compatibility condition
+\[
+\forall k \in K_i\cup K_j: \pi_k\circ \delta_i = \pi_l\circ \delta_j
+\]
+Where $\pi_i: (\frak{F}_k)_{k \in K}\mor \frak{F}_i$ denotes the canonical projection.\\
+We refer to $K$ as the set of keys and $\delta_i$ as the $i^{th}$ database of $\Delta$
+\end{definition}
 \addcontentsline{toc}{section}{References}
 
 \bibliographystyle{alpha}
