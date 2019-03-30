@@ -4,6 +4,7 @@
 \usepackage[all]{xy}
 \usepackage{fancyhdr}
 \usepackage{blkarray}
+\usepackage{calrsfs}
 
 
 \theoremstyle{plain}
@@ -30,6 +31,8 @@
 \usepackage[default]{gfsbodoni}
 \usepackage[T1]{fontenc}
 
+% Declare calligraphic font:
+\DeclareMathAlphabet{\pr}{OMS}{zplm}{m}{n}
 
 
 %start at section 0 for introduction 
@@ -1924,30 +1927,35 @@ ID3 prefers:
 
 \chapter{Generalities}
 
+In the previous part, we discussed the theory of supervised learners. There is a counterpart to this concept in machine learning, namely unsupervised learners.\\
+Both forms of learning ultimately have the same goal: 
+\begin{center}
+Find a best \emph{hypothesis} that maps a set of features $\f{X}$ to a set of labels $\f{y}$
+\end{center}
+Both methods go about doing this is drastically different ways. Essentially, one can discern two major differences:
+
+\begin{itemize}
+\item Supervised learning uses a dataset $\Delta\subset \f{X}\times \f{y}$ to compute the hypothesis. The datasets in unsupervised learning are subsets $\Delta\subset \f{X}$
+\item Unsupervised learning requires us to make a choice $\f{H}\subset \f{y}^\f{X}$ of possible hypothesis functions. In unsupervised learning, we use an extra ingredient, called a cluster to determine the set of possible hypotheses.
+\end{itemize}
 
 \section{the Definition}
 
-\begin{definition}
-A cluster set consists of a surjective map $\pi:\f{U}\mor \r{B}$ of sets, (sometimes together with a basepoint $p\in \r{B}$). The fibers $\pi^{-1}(b)$ will be denoted $\f{U}^b$.
+\begin{definition}\label{unsup:def:cluster}
+A cluster set consists of a surjective map $\pi:\f{U}\mor \pr{B}$ of sets, the fibers $\pi^{-1}(p)$ of which will be denoted by $\f{U}_b$.
 \end{definition}
 
 \begin{definition}
-An unsupervised learner consists of a set of features $\f{X}$ and labels $\f{y}$, a clusterset $\f{U}\mor \r{B}$, dataspace $\f{D}\subset \coprod \f{X}^i$ and hypothesis space $\f{H}\subset \f{y}^\f{X}$ together with maps
+An unsupervised learner consists of a tuple $(\f{X},\f{y}, \f{D},\f{U}, m,c,h)$ where $\f{X}$ is a set of \emph{features}, $\f{y}$ a set of \emph{labels},  $\f{D}\subset \sample\f{X}$ a \emph{dataspace},   $\f{U}$ a cluster -with base $\pr{B}$ as in \ref{unsup:def:cluster} , and functions
 \[
-l:\f{X}\times \f{U}\mor \f{y},\,  m:\r{B}\times \f{D}\mor \f{U}, \textrm{ and } c:\f{D}\times \f{U}\mor \d{R}
-\] 
-called the labeling -, cost -, and method maps. 
+m: \f{U}\mor \f{y}^\f{X}\, , c: \f{D}\times \f{y}^\f{X}\mor \d{R},\,  h: \f{D}\times \pr{B}\mor \f{U}
+\]
+called the method-, cost- and hypothesis functions such that for any dataset $\Delta \in \f{D}$ and parameter $p \in \pr{B}$ we have $h(\Delta,p)\in \f{U}_p$  and
+\[
+\min_{\f{U}_p} c\bigg(\Delta,-\bigg) = c\bigg(\Delta,m(h(\Delta,p)\bigg)
+\]
+
 \footnote{\noindent we say that the feature obtains a label through the cluster by $l$, each dataset associates a $b$-cluster through the method $m$ and this comes with a cost $c$} 
-We further assume the method $m$ is minimal in the sense that for each dataset $\Delta \in \f{D}$ and $b \in \r{B}$, we have
-\[
-\min_{\f{U}^b} c\big(\Delta, -\big)=c\big(\Delta,m(b, \Delta)\big)
-\]
-We can then define the \emph{learned hypothesis} (which intuitively labels each feature optimally) as
-\[
-\r{B}\times \f{D}\mor \f{H}: (b,\Delta)\mor h_{b,\Delta}
-\textrm{ where } h_{b,\Delta}\big(x\big)\define l\big(x,m(b,\Delta)\big)
-\]
-We finally require that $h_\Delta \in \f{H}$
 \end{definition}
 
 \chapter{$k$-Means}
@@ -1968,14 +1976,14 @@ We finally require that $h_\Delta \in \f{H}$
 \begin{definition}
 A relational database for  a set $\Delta$ consists of a sequence of sets $(\f{F}_k)_{k \in K}$ together with a set $\{K_1,\ldots K_n\}$ where $K_i \in \draw{K}$ (following Definition \ref{mb:prob:def:sampling}) and maps
 \[
-\delta_i: \Delta \mor (\frak{X})_{k \in K_i}
+\tau_i: \Delta \mor (\frak{X})_{k \in K_i}
 \]
 satisfying the compatibility condition
 \[
-\forall k \in K_i\cup K_j: \pi_k\circ \delta_i = \pi_l\circ \delta_j
+\forall k \in K_i\cup K_j: \pi_k\circ \tau_i = \pi_k\circ \tau_j
 \]
 Where $\pi_i: (\frak{F}_k)_{k \in K}\mor \frak{F}_i$ denotes the canonical projection.\\
-We refer to $K$ as the set of keys and $\delta_i$ as the $i^{th}$ database of $\Delta$
+We refer to $K$ as the set of keys and $\tau_i$ as the $i^{th}$ \emph{table} of $\Delta$
 \end{definition}
 \addcontentsline{toc}{section}{References}
 
