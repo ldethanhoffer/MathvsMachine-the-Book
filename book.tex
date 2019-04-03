@@ -161,7 +161,7 @@
 \def\locHom{\operatorname {\mathscr{H}\mathit{om}}}
 \DeclareMathOperator{\Tails}{Tails}
 \def\ltr{\overset{L}{\tr}}
-\renewcommand{\r}[1]{\mathcal{#1}}
+\renewcommand{\c}[1]{\mathcal{#1}}
 \newcommand{\mono}{\xymatrix{{}\ar@{^{(}->}[r]&{}}}\DeclareMathOperator{\num}{num}
 \DeclareMathOperator{\rad}{rad}
 \DeclareMathOperator{\Tor}{Tor}
@@ -182,7 +182,7 @@
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 
 
-%interline a little larger
+%imake nterline a little larger
 \linespread{1.28}
 
 %change the dimensions of the margin
@@ -549,9 +549,9 @@ To this end, let $\big\{v_1,\ldots ,v_n \big\}$ be an orthonormal basis for $V$ 
 One major aspect of machine learning is the study of \emph{supervised learners}. \\
 For these algorithms one is given a space of \emph{features} $\f{X}$ together with a space of \emph{labels} $\f{y}$ -the underlying idea being that to each feature $x \in \f{X}$, one can attach its correct label $y \in \f{y}$.\\ 
 In order to do this, One first considers a \emph{hypothesis space} $\f{H}$ of functions $\f{X}\mor \f{y}$ which consist of all the ways one wishes to make a prediction, and collects a \emph{dataset} $\Delta \in \f{X}\times \f{y}$.\\
-Using this dataset , one in turn defines a cost function $c: \f{H}\mor \d{R}$ which intuitively describes how accurate any chosen hypothesis $h \in \f{H}$ is. The appropriate $h$ hypothesis will then be the one that minimizes this cost function.\\\\
+Given a dataset $\Delta$, one in turn defines a cost function $c: \f{H}\mor \d{R}$ which intuitively describes how accurate any chosen hypothesis $h \in \f{H}$ is. The appropriate $h_\Delta$ hypothesis will then be the one that minimizes this cost function.\\\\
 As such the problem of finding minima for functions plays a key role in the field of machine learning.\\
-Arguably, the most popular approach to this problem is to construct a sequence of hypotheses $x_i \in \f{H}$ which decreases the cost function $c$ at each step and hopefully converges to this global minimum. One particularly elegant way of constructing such a sequence is the method of gradient descent.\\
+Arguably, the most popular approach to this problem is to construct a sequence of hypotheses $h_i \in \f{H}$ which decreases the cost function $c(\Delta,h_i)$ at each step and hopefully converges to this global minimum. One particularly elegant way of constructing such a sequence is the method of gradient descent.\\
 In this chapter, we investigate this method and prove that it is indeed descending and converging to a global minimum under certain circumstances. Along the way, we give a bound for the error at each iteration.
 \section{Background and Notation}
 In this context, the hypothesis space $\f{H}$ will be a Hilbert space, i.e. a real vector space $V$, together with an inner product $\bl{-}{-}$ such that the associated norm $\norm{x}\define \sqrt{\bl{x}{x}}$  is complete. For the reader not comfortable with the language of Hilbert spaces,  we assure him it is safe to assume that $V$ is finite-dimensional, in which case the Gram-Schmidt algorithm exhibits an orthonormal basis, and shows in particular that  $V$ is isomorphic to $\d{R}^n$, together with the usual inner product $\bl{x_1,\ldots , x_n}{y_1,\ldots y_n}\define \sum_i x_iy_i$.\\
@@ -569,7 +569,7 @@ f(\alpha x+(1-\alpha)y)\le \alpha f(x')+(1-\alpha)f(y)
 \noindent Our main reason for considering this property is the following characterization of the gradient:
 \begin{theorem}\label{thm:gradient=subgradient}
 Let $f:V\mor \d{R}$ be differentiable at $x$ and convex.\\
-Then the gradient is the only vector $\nabla f(x) \in V$ satisfying
+Then the gradient is the unique vector $\nabla f(x) \in V$ satisfying
 \begin{equation}\label{ineq:subgradient}
 f(y)-f(x)\ge \bl{\nabla f(x)}{ y-x}
 \end{equation}
@@ -925,11 +925,23 @@ f(x_{n})-f^\mu\le \frac{\norm{x_0-x^*}^2}{2\lambda k}
 
 \chapter{Probability theory}
 \section{the General theory}
+
+\subsection{$\sigma$-Algebras}
+\begin{definition}
+Let $\Omega$ be a set.\\
+A $\sigma$-algebra on $\Omega$ is a collection $\pr{F}\subset \r{P}(\Omega)$ of subsets of $\Omega$ such that
+\begin{itemize}
+\item $\Omega \in \pr{F}$
+\item $\forall A, B \in\r{F}: A\setminus B \in\pr{F}$
+\item if $A_i\in\pr{F},\,\,\forall \,i \in \d{N}$ then $\bigcup_{i \in \d{N}} A_i \in \pr{F}$
+\end{itemize}
+A measurable space consists of a couple $\big(\Omega,\pr{F}\big)$ where $\pr{F}$ is a $\sigma$-algebra on $\Omega$
+\end{definition}
+\subsection{Sampling}
+
 \begin{convention}\label{conv:prob_univ}
 We will fix a probability space $(\textrm{U}, \r{U},\lambda)$ and throughout any random variable $X$ on $(\Omega,\r{F})$ will always have this as its domain.
 \end{convention}
-\subsection{Sampling}
-
 
 \begin{definition}\label{mb:prob:def:sampling}
 Let $(\Omega, \r{F})$ be a measurable space.\\
@@ -957,6 +969,25 @@ We say that $(x_1\ldots x_n)$ is sampled from $P$ if it lies in the image of the
 The above map $\ev: \Omega\times RS\Omega\mor S\Omega: $
 will be referred to as the sampling map
 \end{remark}
+
+
+\section{a Taxonomy of distributions}
+\subsection{Discrete distributions}
+\begin{definition}
+We say that a probability $P$ on $(\Omega,\pr{F})$ is disrete if there exists a sequence $(x_i)_{i \in \d{N}}$ such that
+\[
+P\big(\Omega\setminus\{(x_i)_{i \in \d{N}}\}\big)=0
+\]
+\end{definition}
+Note that in particular any probability on a countable set is discrete
+\subsubsection{Bernouilli}
+\begin{definition}
+Let $\Omega\define \d{Z}_2$ and $\pr{F}=\pr{P}(\Omega)$. Then any probabilityon $\Omega$ is called Bernouilli.\\
+If $p=P(1)$, then the density is given by
+\[
+f_P(x) = p^x(1-p)^{1-x}
+\]
+\end{definition}
 \chapter{Statistics}
 
 

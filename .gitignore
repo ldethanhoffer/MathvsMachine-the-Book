@@ -5,3 +5,4 @@ book.aux
 book.synctex.gz
 book.toc
 book.dvi
+.DS_store
