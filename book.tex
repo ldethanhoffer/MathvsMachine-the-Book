@@ -220,9 +220,9 @@
 \tableofcontents{}
 \noindent\hrulefill
 
-\part{Mathematical background}
 
-\chapter{Linear algebra}
+\part{Vector spaces}
+\chapter{Linear Algebra}
 \section{the Normal equation}
 
 
@@ -524,6 +524,8 @@ f^+ = (f^*\circ f)^{-1}\circ f^*
 \begin{proof}
 	Since $f$ is injective (so that $\ker(f)=0$), $f^+$ is the pseudo-inverse to the triple $(V,\im(f)^{\perp},f)$ by Definition \ref{def:mpinverse}. It follows immediately that this condition is independent of the inner product on $V$. To prove the formula, simply note that $f^*\circ f$ is invertible if $f$ is injective and apply the second criterium of Lemma \ref{lem:proj=mppsinverse}
 \end{proof}
+
+\chapter{Calculus}
 
 
 \noindent We finish this section by giving a more explicit description of this map after introducing coordinates:\\
@@ -926,7 +928,8 @@ f(x_{n})-f^\mu\le \frac{\norm{x_0-x^*}^2}{2\lambda k}
 \end{proof}
 
 
-\chapter{Probability theory}
+\part{Probability theory and Statistics}
+\chapter{probability theory}
 \section{the General theory}
 
 \subsection{Measurable spaces}
@@ -957,7 +960,7 @@ We call the resulting triple a measure (resp. probabbility) space
 
 \subsection{Random variables}
 \begin{definition}
-Let $(Omega, \r{U}, \lambda)$ be a probability space and $(\Omega, \r{F})$ a measurable space. A random variable is a function
+Let $(\Omega, \r{U}, \lambda)$ be a probability space and $(\Omega, \r{F})$ a measurable space. A random variable is a function
 \[
 X: U\mor \Omega
 \]
@@ -966,11 +969,19 @@ such that $X^*(\r{F})\subset \r{U}$
 \begin{lemma}
 Let $X: (\Omega, \r{F}, P)\mor (\Omega, \r{F})$ be a random variable. Then the function
 \[
-X^*(P)(A) = 
+X_*P: \r{F}\mor \d{R}:  A\fun P(X^{-1}(A)) 
 \]
+defines a probability.
 \end{lemma}
-\section{a Taxonomy of distributions}
-\subsection{Discrete distributions}
+\begin{proof}
+This is a routine exercise
+\end{proof}
+\begin{definition}
+The probability $X_*P$ defined above is the \emph{pushforward of $P$ along $A$}.\\
+We write $X\sim Q$ if $X_*P =Q$
+\end{definition}
+\section{a Taxonomy of probabilities}
+\subsection{Discrete probabilities}
 \begin{definition}
 We say that a probability $P$ on $(\Omega,\r{F})$ is discrete if there exists a sequence $(x_i)_{i \in \d{N}}$ such that
 \[
@@ -987,20 +998,20 @@ f_P(x) = p^x(1-p)^{1-x}
 \]
 \end{definition}
 
-\subsection{Sampling}
+\section{Sampling}
 
 \begin{convention}\label{conv:prob_univ}
-We will fix a probability space $(\textrm{U}, \r{U},\lambda)$ and throughout any random variable $X$ on $(\Omega,\r{F})$ will always have this as its domain.
+We will fix a probability space $(\textrm{U}, \r{U},\lambda)$ and throughout any random variable $X$ on $(\Omega,\r{F})$ will always have this space as its domain.
 \end{convention}
 
-\begin{definition}\label{mb:prob:def:sampling}
+\begin{definition}\label{prob:def:sampling}
 Let $(\Omega, \r{F})$ be a measurable space.\\
 The \emph{sample space} of $\Omega$ is the set 
 \[
 \sample{\Omega}\define \coprod_{i \in \d{N}}\Omega^i
 \]
 endowed with the canonical $\sigma$-algebra $\coprod_{i \in \d{N}} \r{F}$.\\
-The \emph{drawing space} is the subspace
+The \emph{drawing space} is the subspace of $\sample{\Omega}$ defined as:
 \[
 \draw{\Omega} = \big\{ (w_1,\ldots w_n) \in \sample{\Omega} \vert \, \omega_i\neq \omega_j \big\}
 \]
@@ -1011,9 +1022,13 @@ RS\Omega\define  \coprod_{i \in \d{N}} \bigg\{(X_1,\ldots X_n)\vert \, X_i \text
 \] 
 We say that $(x_1\ldots x_n)$ is sampled from $P$ if it lies in the image of the canonical map
 \[
-\ev: U\times RS\Omega\mor S\Omega: \bigg(\omega, \big(X_1,\ldots X_n\big)\bigg)\fun \bigg(X_1(\omega),\ldots X_n(\omega)\bigg)
+\ev: U\times RS\Omega\mor S\Omega: \bigg(u, \big(X_1,\ldots X_n\big)\bigg)\fun \bigg(X_1(u),\ldots X_n(u)\bigg)
 \]
-and $X_i\sim P$
+and $X_i\sim P$.
+Finally, we may need to restrict the choice of probabilities in the future. To this end, assume $\big(P_\theta\big)_{\theta \in \Theta}$ is a collection of probabilities on $(\Omega,\r{F})$. Then we define
+\[
+RV_\theta \Omega \define \bigg\{( X_1,\ldots X_n) \in RS\Omega\,\,\vert \,\, \exists \theta: X_i\sim P\theta \bigg\}
+\]
 \end{definition}
 
 
@@ -1417,6 +1432,7 @@ We say that a Bayesian model $\Theta \times \Sigma$ 	is naive if $P(-\vert \thet
 \end{definition}
 
 
+
 \section{the Naive Bayes Classifier}
 
 
@@ -1447,7 +1463,7 @@ Assume naivity (wish is realistic in this scenario), we have
 $NB_{John}=0,1\cdot 0.3\cdots 0.5$ whereas $NB_{Sarah} =0.2\cdot 0.5\dots 0.5$. So Sarah wrote it. 	
 \end{example}
 
-%\part{Supervised Learners}
+\part{Supervised Learners}
 \chapter{the General Theory}
 \section{Defining supervised learners}
 We begin our study of machine learning by suggesting a definition for supervised learners.\\
@@ -2012,7 +2028,7 @@ A cluster set consists of a surjective map $\pi:\f{U}\mor \pr{B}$ of sets, the f
 \end{definition}
 
 \begin{definition}
-An unsupervised learner consists of a tuple $(\f{X},\f{y}, \f{D},\f{U}, m,c,h)$ where $\f{X}$ is a set of \emph{features}, $\f{y}$ a set of \emph{labels},  $\f{D}\subset \sample\f{X}$ a \emph{dataspace},   $\f{U}$ a cluster -with base $\pr{B}$ as in \ref{unsup:def:cluster} , and functions
+An unsupervised learner consists of a tuple $(\f{X},\f{y}, \f{D},\f{U}, m,c,h)$ where $\f{X}$ is a set of \emph{features}, $\f{y}$ a set of \emph{labels},  $\f{D}\subset \sample\f{X}$ a \emph{dataspace} (where $\sample\f{X}$ stands for the sampling space ref{prob:def:sample}),   $\f{U}$ a cluster with base $\pr{B}$ (as in \ref{unsup:def:cluster}) , and functions
 \[
 m: \f{U}\mor \f{y}^\f{X}\, , c: \f{D}\times \f{y}^\f{X}\mor \d{R},\,  h: \f{D}\times \pr{B}\mor \f{U}
 \]
